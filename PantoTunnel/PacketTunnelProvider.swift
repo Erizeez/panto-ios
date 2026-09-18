@@ -1,6 +1,7 @@
 import Foundation
 import NetworkExtension
 import os.log
+import PantoShared
 
 #if canImport(PantoKit)
 import PantoKit
@@ -19,7 +20,7 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
         watchdog = MemoryWatchdog { [weak self] in
             self?.logger.warning("⚠️ 触发紧急内存回收，调用 Go 底层释放堆内存...")
             #if canImport(PantoKit)
-            PantoFreeMemory()
+            PantoMobileFreeMemory()
             #endif
         }
 
@@ -54,8 +55,9 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
         logger.info("🛑 Panto Tunnel 正在停止，原因代码: \(reason.rawValue)")
 
         #if canImport(PantoKit)
-        _ = PantoStop()
-        PantoFreeMemory()
+        var stopErr: NSError?
+        _ = PantoMobileStop(&stopErr)
+        PantoMobileFreeMemory()
         #endif
 
         watchdog = nil
@@ -76,7 +78,7 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
 
         #if canImport(PantoKit)
         var actionErr: NSError?
-        let resultData = PantoDispatch(request.action, request.payload, &actionErr)
+        let resultData = PantoMobileDispatch(request.action, request.payload, &actionErr)
         if let err = actionErr {
             let resp = IPCResponse(success: false, error: err.localizedDescription)
             completionHandler?(try? JSONEncoder().encode(resp))

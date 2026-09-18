@@ -12,4 +12,5 @@ xcuserdata/
 .swiftpm/
 
 # PantoKit 预编译二进制框架 (由 build-xcframework.sh 产出)
+Frameworks/
 PantoKit/PantoKit.xcframework
