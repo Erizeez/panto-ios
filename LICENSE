@@ -1,0 +1,37 @@
+Panto for iOS - Commercial & Open Source Dual License Declaration
+==================================================================
+
+1. Architecture & Copyright Boundary (架构与版权隔离边界)
+---------------------------------------------------------
+This software ("panto-ios") is architecturally separated into two distinct,
+independent OS processes running within their own sandbox boundaries, communicating
+exclusively via standard Apple System Inter-Process Communication (IPC / XPC /
+NETunnelProviderSession.sendProviderMessage):
+
+  [Process 1: Main Application (SwiftUI UI & Commercial Logic)]
+    - Copyright (C) 2026 Panto Contributors.
+    - All Rights Reserved / Proprietary Commercial License (or MIT License).
+    - Contains user interface, iCloud sync, and StoreKit 2 In-App Purchase logic.
+    - According to Free Software Foundation (FSF) guidelines, independent programs
+      communicating across IPC boundaries do not constitute derivative works of each other.
+
+  [Process 2: Network Extension (PacketTunnelProvider & PantoKit Core)]
+    - Incorporates the Panto open-source core engine licensed under GNU General Public
+      License Version 3 (GPL-3.0).
+    - Governed by Section 2 below (App Store Exception).
+
+2. Apple App Store Exception to GPL-3.0 (苹果应用商店许可例外条款)
+------------------------------------------------------------------
+To resolve any perceived incompatibilities between the GNU General Public License
+Version 3 and the Apple App Store Terms of Service (including usage rules and DRM):
+
+As a special exception, the copyright holders of Panto grant permission to
+distribute and convey this software (or binaries derived from it) through the
+Apple iOS App Store and Mac App Store, subject to Apple's App Store Terms of Service
+and End User License Agreement (EULA), notwithstanding any contrary provisions
+in the GPL-3.0.
+
+All other terms and conditions of the GNU General Public License Version 3 continue
+to apply to the underlying source code and any modifications made thereto.
+Recipients of the binary maintain the right to obtain the source code of the
+Network Extension and Panto Core under the terms of the GPL-3.0.

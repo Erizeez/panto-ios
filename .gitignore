@@ -1,0 +1,15 @@
+# Xcode & Apple
+.DS_Store
+build/
+DerivedData/
+*.xcuserstate
+project.xcworkspace/xcuserdata/
+xcuserdata/
+*.moved-aside
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# PantoKit 预编译二进制框架 (由 build-xcframework.sh 产出)
+PantoKit/PantoKit.xcframework
