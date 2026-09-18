@@ -18,9 +18,9 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
 
         // 1. 初始化 15MB 内存硬红线看门狗
         watchdog = MemoryWatchdog { [weak self] in
-            self?.logger.warning("⚠️ 触发紧急内存回收，调用 Go 底层释放堆内存...")
+            self?.logger.warning("⚠️ 触发紧急内存回收，调用 Rust 底层释放堆内存与物理页...")
             #if canImport(PantoKit)
-            PantoMobileFreeMemory()
+            panto_mobile_free_memory()
             #endif
         }
 
@@ -43,8 +43,8 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
 
             self?.logger.info("✅ Panto Tunnel 虚拟网卡装载成功，准备启动底层核心...")
             #if canImport(PantoKit)
-            // 在实际集成中，将配置 YAML 与 tun fd 传递给 Go 核心引擎
-            // let err = PantoStart(configYAML, tunFD)
+            // 在实际集成中，传递配置 YAML 给 Rust 核心引擎
+            // _ = panto_mobile_start(configYAML)
             #endif
 
             completionHandler(nil)
@@ -55,9 +55,8 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
         logger.info("🛑 Panto Tunnel 正在停止，原因代码: \(reason.rawValue)")
 
         #if canImport(PantoKit)
-        var stopErr: NSError?
-        _ = PantoMobileStop(&stopErr)
-        PantoMobileFreeMemory()
+        _ = panto_mobile_stop()
+        panto_mobile_free_memory()
         #endif
 
         watchdog = nil
@@ -77,12 +76,14 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
         logger.debug("📩 收到主 App IPC 请求动作: \(request.action)")
 
         #if canImport(PantoKit)
-        var actionErr: NSError?
-        let resultData = PantoMobileDispatch(request.action, request.payload, &actionErr)
-        if let err = actionErr {
-            let resp = IPCResponse(success: false, error: err.localizedDescription)
-            completionHandler?(try? JSONEncoder().encode(resp))
-            return
+        let actionStr = request.action
+        let payloadStr = request.payload.flatMap { String(data: $0, encoding: .utf8) } ?? ""
+        let cResult = panto_mobile_dispatch(actionStr, payloadStr)
+        var resultData: Data? = nil
+        if let cResult = cResult {
+            let str = String(cString: cResult)
+            resultData = str.data(using: .utf8)
+            panto_free_string(cResult)
         }
         let resp = IPCResponse(success: true, data: resultData)
         completionHandler?(try? JSONEncoder().encode(resp))
