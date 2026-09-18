@@ -1,6 +1,18 @@
 import SwiftUI
 import NetworkExtension
 
+#if canImport(UIKit)
+import UIKit
+private extension Color {
+    static let cardBackground = Color(UIColor.secondarySystemBackground)
+}
+#elseif canImport(AppKit)
+import AppKit
+private extension Color {
+    static let cardBackground = Color(NSColor.windowBackgroundColor)
+}
+#endif
+
 /// DashboardView 是 Panto iOS 客户端的现代化主仪表盘。
 public struct DashboardView: View {
     @EnvironmentObject private var vpn: VPNManager
@@ -62,7 +74,7 @@ public struct DashboardView: View {
             }
         }
         .padding()
-        .background(Color(UIColor.secondarySystemBackground))
+        .background(Color.cardBackground)
         .cornerRadius(16)
     }
 
@@ -118,7 +130,7 @@ public struct DashboardView: View {
                 navigationRow(icon: "slider.horizontal.3", title: "策略调度器", subtitle: "K8s 纯函数 Filter-Score-Pick")
                 navigationRow(icon: "doc.text", title: "声明式配置", subtitle: "YAML 文件查看与本地导入")
             }
-            .background(Color(UIColor.secondarySystemBackground))
+            .background(Color.cardBackground)
             .cornerRadius(16)
         }
     }
@@ -139,7 +151,7 @@ public struct DashboardView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(Color(UIColor.secondarySystemBackground))
+        .background(Color.cardBackground)
         .cornerRadius(16)
     }
 
@@ -241,7 +253,7 @@ struct ProUpgradeView: View {
                     featureBenefit(icon: "icloud.fill", title: "iCloud 跨设备加密漫游", desc: "配置文件在多台 iOS / Mac 设备间安全同步")
                 }
                 .padding()
-                .background(Color(UIColor.secondarySystemBackground))
+                .background(Color.cardBackground)
                 .cornerRadius(16)
 
                 Spacer()
@@ -281,7 +293,11 @@ struct ProUpgradeView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 20)
             }
-            .navigationBarItems(trailing: Button("关闭") { dismiss() })
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("关闭") { dismiss() }
+                }
+            }
         }
     }
 

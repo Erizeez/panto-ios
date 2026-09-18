@@ -10,6 +10,7 @@ let package = Package(
     products: [
         .library(name: "PantoShared", targets: ["PantoShared"]),
         .library(name: "PantoTunnel", targets: ["PantoTunnel"]),
+        .library(name: "PantoApp", targets: ["PantoApp"]),
     ],
     dependencies: [],
     targets: [
@@ -28,6 +29,14 @@ let package = Package(
                 "PantoKit"
             ],
             path: "PantoTunnel"
+        ),
+        .target(
+            name: "PantoApp",
+            dependencies: [
+                "PantoShared",
+                "PantoKit"
+            ],
+            path: "PantoApp"
         ),
     ]
 )

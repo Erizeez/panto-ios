@@ -1,11 +1,12 @@
 import Foundation
 import NetworkExtension
 import os.log
+import PantoShared
 
 /// VPNManager 负责在主 App 侧管理系统级 VPN 描述文件配置、状态同步与跨进程 IPC。
 @MainActor
 public final class VPNManager: ObservableObject {
-    private static let logger = Logger(subsystem: "org.panto.ios", category: "VPNManager")
+    nonisolated private static let logger = Logger(subsystem: "org.panto.ios", category: "VPNManager")
 
     @Published public private(set) var status: NEVPNStatus = .disconnected
     @Published public private(set) var currentUptime: Int = 0
@@ -96,12 +97,14 @@ public final class VPNManager: ObservableObject {
             object: providerManager?.connection,
             queue: .main
         ) { [weak self] _ in
-            guard let self = self else { return }
-            self.status = self.providerManager?.connection.status ?? .disconnected
-            if self.status == .connected {
-                self.startPollTimer()
-            } else if self.status == .disconnected {
-                self.stopPollTimer()
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+                self.status = self.providerManager?.connection.status ?? .disconnected
+                if self.status == .connected {
+                    self.startPollTimer()
+                } else if self.status == .disconnected {
+                    self.stopPollTimer()
+                }
             }
         }
     }

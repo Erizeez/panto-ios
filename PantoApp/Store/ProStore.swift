@@ -1,12 +1,13 @@
 import Foundation
 import StoreKit
 import os.log
+import PantoShared
 
 /// ProStore 采用 Apple 最新的 StoreKit 2 框架实现商业化“一次性永久买断 (Lifetime Pro)”。
 /// 完全在本地通过 Apple 密码学 JWS 校验收据与凭据，无需自建后端服务器，防篡改且支持离线激活。
 @MainActor
 public final class ProStore: ObservableObject {
-    private static let logger = Logger(subsystem: "org.panto.ios", category: "ProStore")
+    nonisolated private static let logger = Logger(subsystem: "org.panto.ios", category: "ProStore")
 
     @Published public private(set) var isProUnlocked: Bool = false
     @Published public private(set) var lifetimeProduct: Product?
@@ -120,7 +121,7 @@ public final class ProStore: ObservableObject {
     }
 
     /// JWS 密码学签名有效性校验。
-    private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
+    nonisolated private func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         switch result {
         case .unverified(_, let error):
             throw error
