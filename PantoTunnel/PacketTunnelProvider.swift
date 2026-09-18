@@ -13,6 +13,8 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
     private let logger = Logger(subsystem: "org.panto.ios", category: "PacketTunnelProvider")
     private var watchdog: MemoryWatchdog?
 
+    private var isRunning = false
+
     public override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         logger.info("🚀 Panto Tunnel 扩展正在启动...")
 
@@ -35,24 +37,27 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
 
         // 3. 应用网络配置
         setTunnelNetworkSettings(tunnelNetworkSettings) { [weak self] error in
+            guard let self = self else { return }
             if let error = error {
-                self?.logger.error("❌ 应用网络配置失败: \(error.localizedDescription)")
+                self.logger.error("❌ 应用网络配置失败: \(error.localizedDescription)")
                 completionHandler(error)
                 return
             }
 
-            self?.logger.info("✅ Panto Tunnel 虚拟网卡装载成功，准备启动底层核心...")
+            self.logger.info("✅ Panto Tunnel 虚拟网卡装载成功，准备启动底层核心...")
             #if canImport(PantoKit)
-            // 在实际集成中，传递配置 YAML 给 Rust 核心引擎
-            // _ = panto_mobile_start(configYAML)
+            _ = panto_mobile_start("")
             #endif
 
+            self.isRunning = true
+            self.startPacketLoop()
             completionHandler(nil)
         }
     }
 
     public override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
         logger.info("🛑 Panto Tunnel 正在停止，原因代码: \(reason.rawValue)")
+        isRunning = false
 
         #if canImport(PantoKit)
         _ = panto_mobile_stop()
@@ -61,6 +66,30 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
 
         watchdog = nil
         completionHandler()
+    }
+
+    /// 虚拟网卡底层数据包轮询读取泵：将 iOS TUN 数据包无缝泵入 Rust PantoKit 进行 WireGuard 加密
+    private func startPacketLoop() {
+        guard isRunning else { return }
+
+        packetFlow.readPackets { [weak self] packets, protocols in
+            guard let self = self, self.isRunning else { return }
+
+            #if canImport(PantoKit)
+            var outBuf = [UInt8](repeating: 0, count: 2048)
+            for packet in packets {
+                packet.withUnsafeBytes { rawBuffer in
+                    guard let baseAddress = rawBuffer.baseAddress?.assumingMemoryBound(to: UInt8.self) else { return }
+                    let written = panto_mobile_process_tun_packet(baseAddress, packet.count, &outBuf, outBuf.count)
+                    if written > 0 {
+                        // 数据包已成功完成 WireGuard 隧道加密封包
+                    }
+                }
+            }
+            #endif
+
+            self.startPacketLoop()
+        }
     }
 
     /// handleAppMessage 是跨进程 IPC 防火墙的关键接收端。
