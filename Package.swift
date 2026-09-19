@@ -3,40 +3,26 @@ import PackageDescription
 
 let package = Package(
     name: "PantoIOS",
+    defaultLocalization: "zh-Hans",
     platforms: [
         .iOS(.v16),
         .macOS(.v13)
     ],
     products: [
         .library(name: "PantoShared", targets: ["PantoShared"]),
-        .library(name: "PantoTunnel", targets: ["PantoTunnel"]),
-        .library(name: "PantoApp", targets: ["PantoApp"]),
     ],
     dependencies: [],
     targets: [
-        .binaryTarget(
-            name: "PantoKit",
-            path: "Frameworks/PantoKit.xcframework"
-        ),
         .target(
             name: "PantoShared",
             path: "Shared"
         ),
-        .target(
-            name: "PantoTunnel",
+        .testTarget(
+            name: "PantoTests",
             dependencies: [
-                "PantoShared",
-                "PantoKit"
+                "PantoShared"
             ],
-            path: "PantoTunnel"
-        ),
-        .target(
-            name: "PantoApp",
-            dependencies: [
-                "PantoShared",
-                "PantoKit"
-            ],
-            path: "PantoApp"
+            path: "Tests/PantoTests"
         ),
     ]
 )

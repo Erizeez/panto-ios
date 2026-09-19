@@ -1,0 +1,791 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03AE3A916CD9DB5C4084B0CD /* ProStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665508EAF947C1D61C645FEF /* ProStore.swift */; };
+		0AAB4BE4B71F56F10FFE005D /* PantoKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49C0B312BC76EFF590581853 /* PantoKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1BB1557FB5247A36C135F958 /* PantoKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C0B312BC76EFF590581853 /* PantoKit.xcframework */; };
+		2078013B5B300F7E668FA82D /* ProUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD7874A1636379C54F707F1 /* ProUpgradeView.swift */; };
+		32689C3C4A8F8346165335C2 /* PantoKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C0B312BC76EFF590581853 /* PantoKit.xcframework */; };
+		3350AE12DB5CCE1A8C82B2D7 /* MagicIPConflictSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F6D5DAB232F8C55485332D /* MagicIPConflictSheet.swift */; };
+		3514E3139C7F2B5FBA3F88C1 /* TrafficChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0E268C9C890906900870B9 /* TrafficChartView.swift */; };
+		3C2A6769E67692830740C009 /* VirtualInterfacesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C75AEADF5AD65FF206BECD4 /* VirtualInterfacesSheet.swift */; };
+		3C37EFC98ACBFF8C208E62ED /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F68203330A5C15C7B2D1B1 /* AppState.swift */; };
+		4760BA7887F3B7541D048B50 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4994788BEA41EAE19E3F2FC /* Models.swift */; };
+		4848BD17BD9637343FDF5C32 /* libPantoShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6A1196B2CC669BEFE912CC /* libPantoShared.a */; };
+		4C2A1EDEA7EFC16F90F52390 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5A6CA43555478790B3FCE /* App.swift */; };
+		51039E707C4258248FFB04DA /* LatencyBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B379B7B5EA061E12F5BE25A2 /* LatencyBadge.swift */; };
+		52E62A251CAF03447524EE7A /* MockPantoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D656BE8F1DFB6A6562CC403 /* MockPantoClient.swift */; };
+		68D32C030F26CA5F601644E4 /* AppGroupConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AADA82C86AC265ECDFB4560 /* AppGroupConstants.swift */; };
+		725EBC67CCAA408D68992672 /* PantoClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A7535CBDC758C95039FB0B /* PantoClientProtocol.swift */; };
+		743870232E3E7551CF3F93D1 /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F178F14207DB5D28F1272AAF /* GroupsView.swift */; };
+		74D938AEE5AFE97DC6451BFD /* IPCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B536B7C8B261730E7FDF5 /* IPCMessage.swift */; };
+		7DF0B7ED4331BBD8F12680AF /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1259F514217018557297D5 /* LanguageManager.swift */; };
+		872EF778A207DE7959C11F11 /* PantoTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8A914A6B4221613B9AE40AEC /* PantoTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8B861B040A29874BB4ABF871 /* ProbeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D3CFF28817751A1509197 /* ProbeView.swift */; };
+		92145B9AC772E0EC98835070 /* libPantoShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6A1196B2CC669BEFE912CC /* libPantoShared.a */; };
+		AE89A526693CEB7B32043807 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B19A002D2E756F4779F004C /* DashboardView.swift */; };
+		BEF3995F03BF220DE1337C18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04234F97DE15CA350BB84515 /* SettingsView.swift */; };
+		C23E91DD22F4D8D27E718EF6 /* IPCPantoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1FF99E7FB9F93B517155E /* IPCPantoClient.swift */; };
+		CECFAA84FDBF133F88FD7E48 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC86C83CA5EE59EA12C38A19 /* PacketTunnelProvider.swift */; };
+		D47B534FDD40C87125ADB77C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17714931EA369D7B70EB90F6 /* Localizable.strings */; };
+		D54CCC91344C619B051E28AF /* PowerButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B13739D3A5101A41E3B8202 /* PowerButtonView.swift */; };
+		D7BB83727A109C29F3E5F640 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CD11E961555AD32F971724 /* MainTabView.swift */; };
+		DECAC46A51C95ABEB1EC43D5 /* VPNManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684905FAF45285770224C2A2 /* VPNManager.swift */; };
+		EB93A5AFDF3CBA2E42B26D0E /* MemoryWatchdog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC954D43F7B8C18BB17D7A /* MemoryWatchdog.swift */; };
+		F207266CB917A5AD9CF2690F /* TopologyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAF4D412697E521B90A7861 /* TopologyView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		53E24109950111000C9B2352 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53B5B819E73723B22B6AC45E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E7F1C9C6B0DF6A2B7A01BC6;
+			remoteInfo = PantoShared;
+		};
+		7AAEC9D099DB9B37EE97ACA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53B5B819E73723B22B6AC45E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84AA6ADD389C9382CC6190BB;
+			remoteInfo = PantoTunnel;
+		};
+		9D3A89FC7ACBE2D88E5985DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53B5B819E73723B22B6AC45E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E7F1C9C6B0DF6A2B7A01BC6;
+			remoteInfo = PantoShared;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		86EE172DD8CD3E1E7F3CD254 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				872EF778A207DE7959C11F11 /* PantoTunnel.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC006EDD59964A03CDB6CF73 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0AAB4BE4B71F56F10FFE005D /* PantoKit.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		02DC954D43F7B8C18BB17D7A /* MemoryWatchdog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryWatchdog.swift; sourceTree = "<group>"; };
+		04234F97DE15CA350BB84515 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		065D3CFF28817751A1509197 /* ProbeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbeView.swift; sourceTree = "<group>"; };
+		0D1259F514217018557297D5 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		0D656BE8F1DFB6A6562CC403 /* MockPantoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPantoClient.swift; sourceTree = "<group>"; };
+		19F68203330A5C15C7B2D1B1 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1B19A002D2E756F4779F004C /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		28CD11E961555AD32F971724 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		292F1BAA085EAC12AC4028E3 /* PantoTunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PantoTunnel.entitlements; sourceTree = "<group>"; };
+		41B1FF99E7FB9F93B517155E /* IPCPantoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCPantoClient.swift; sourceTree = "<group>"; };
+		49A7535CBDC758C95039FB0B /* PantoClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantoClientProtocol.swift; sourceTree = "<group>"; };
+		49C0B312BC76EFF590581853 /* PantoKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PantoKit.xcframework; path = Frameworks/PantoKit.xcframework; sourceTree = "<group>"; };
+		4B13739D3A5101A41E3B8202 /* PowerButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerButtonView.swift; sourceTree = "<group>"; };
+		5176794743022D3E31C0459A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5A6A1196B2CC669BEFE912CC /* libPantoShared.a */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.ar; path = libPantoShared.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		665508EAF947C1D61C645FEF /* ProStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProStore.swift; sourceTree = "<group>"; };
+		684905FAF45285770224C2A2 /* VPNManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNManager.swift; sourceTree = "<group>"; };
+		6890F5FD3557E43BCF53CD0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		710662EBC521857EFEE23317 /* PantoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PantoApp.entitlements; sourceTree = "<group>"; };
+		77F6D5DAB232F8C55485332D /* MagicIPConflictSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicIPConflictSheet.swift; sourceTree = "<group>"; };
+		8A914A6B4221613B9AE40AEC /* PantoTunnel.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PantoTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AADA82C86AC265ECDFB4560 /* AppGroupConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupConstants.swift; sourceTree = "<group>"; };
+		8C75AEADF5AD65FF206BECD4 /* VirtualInterfacesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualInterfacesSheet.swift; sourceTree = "<group>"; };
+		985DDABEA613B82113C87A4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AE0E268C9C890906900870B9 /* TrafficChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficChartView.swift; sourceTree = "<group>"; };
+		B379B7B5EA061E12F5BE25A2 /* LatencyBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatencyBadge.swift; sourceTree = "<group>"; };
+		B3C5A6CA43555478790B3FCE /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		B4994788BEA41EAE19E3F2FC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		BC86C83CA5EE59EA12C38A19 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		BEAF4D412697E521B90A7861 /* TopologyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopologyView.swift; sourceTree = "<group>"; };
+		BFD7874A1636379C54F707F1 /* ProUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeView.swift; sourceTree = "<group>"; };
+		C8EA098041F6DE3B0169E763 /* PantoApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PantoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD0C02A94E35E3787626FA23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E92B536B7C8B261730E7FDF5 /* IPCMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCMessage.swift; sourceTree = "<group>"; };
+		F178F14207DB5D28F1272AAF /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8FFC4EE15F8E69AE4489D9AC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92145B9AC772E0EC98835070 /* libPantoShared.a in Frameworks */,
+				1BB1557FB5247A36C135F958 /* PantoKit.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6B2F27FAE3F2FABE3EAE871 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4848BD17BD9637343FDF5C32 /* libPantoShared.a in Frameworks */,
+				32689C3C4A8F8346165335C2 /* PantoKit.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E5892EDB90667F894E6385E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A6A1196B2CC669BEFE912CC /* libPantoShared.a */,
+				C8EA098041F6DE3B0169E763 /* PantoApp.app */,
+				8A914A6B4221613B9AE40AEC /* PantoTunnel.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		10119C6EB35E1E10598337FB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0D1259F514217018557297D5 /* LanguageManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		2D95378E6E8B298D8BE2D24E /* PantoApp */ = {
+			isa = PBXGroup;
+			children = (
+				B3C5A6CA43555478790B3FCE /* App.swift */,
+				6890F5FD3557E43BCF53CD0D /* Info.plist */,
+				710662EBC521857EFEE23317 /* PantoApp.entitlements */,
+				95AC8BF7048F771D66F37165 /* Resources */,
+				10119C6EB35E1E10598337FB /* Services */,
+				B00B366027DF83C0383A7D30 /* Store */,
+				E1E61EC3104238F45BFCC998 /* Tunnel */,
+				618EAFCA00E68783C10AC205 /* ViewModels */,
+				4C1EBA592768CE7F07D26A6C /* Views */,
+			);
+			path = PantoApp;
+			sourceTree = "<group>";
+		};
+		30FDD58EB07D0308C59EC8E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49C0B312BC76EFF590581853 /* PantoKit.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		32DC2B15352503F712C2CF40 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8AADA82C86AC265ECDFB4560 /* AppGroupConstants.swift */,
+				E92B536B7C8B261730E7FDF5 /* IPCMessage.swift */,
+				41B1FF99E7FB9F93B517155E /* IPCPantoClient.swift */,
+				0D656BE8F1DFB6A6562CC403 /* MockPantoClient.swift */,
+				B4994788BEA41EAE19E3F2FC /* Models.swift */,
+				49A7535CBDC758C95039FB0B /* PantoClientProtocol.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		4C1EBA592768CE7F07D26A6C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B19A002D2E756F4779F004C /* DashboardView.swift */,
+				F178F14207DB5D28F1272AAF /* GroupsView.swift */,
+				77F6D5DAB232F8C55485332D /* MagicIPConflictSheet.swift */,
+				28CD11E961555AD32F971724 /* MainTabView.swift */,
+				065D3CFF28817751A1509197 /* ProbeView.swift */,
+				BFD7874A1636379C54F707F1 /* ProUpgradeView.swift */,
+				04234F97DE15CA350BB84515 /* SettingsView.swift */,
+				BEAF4D412697E521B90A7861 /* TopologyView.swift */,
+				8C75AEADF5AD65FF206BECD4 /* VirtualInterfacesSheet.swift */,
+				EAC410B40D7194BC2AAE7420 /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5D664EB52B8167C9973E29A6 /* PantoTunnel */ = {
+			isa = PBXGroup;
+			children = (
+				985DDABEA613B82113C87A4E /* Info.plist */,
+				02DC954D43F7B8C18BB17D7A /* MemoryWatchdog.swift */,
+				BC86C83CA5EE59EA12C38A19 /* PacketTunnelProvider.swift */,
+				292F1BAA085EAC12AC4028E3 /* PantoTunnel.entitlements */,
+			);
+			path = PantoTunnel;
+			sourceTree = "<group>";
+		};
+		618EAFCA00E68783C10AC205 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				19F68203330A5C15C7B2D1B1 /* AppState.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		95AC8BF7048F771D66F37165 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				17714931EA369D7B70EB90F6 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		984736B81772C1F3D17B47F6 = {
+			isa = PBXGroup;
+			children = (
+				2D95378E6E8B298D8BE2D24E /* PantoApp */,
+				5D664EB52B8167C9973E29A6 /* PantoTunnel */,
+				32DC2B15352503F712C2CF40 /* Shared */,
+				30FDD58EB07D0308C59EC8E1 /* Frameworks */,
+				0E5892EDB90667F894E6385E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B00B366027DF83C0383A7D30 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				665508EAF947C1D61C645FEF /* ProStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		E1E61EC3104238F45BFCC998 /* Tunnel */ = {
+			isa = PBXGroup;
+			children = (
+				684905FAF45285770224C2A2 /* VPNManager.swift */,
+			);
+			path = Tunnel;
+			sourceTree = "<group>";
+		};
+		EAC410B40D7194BC2AAE7420 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B379B7B5EA061E12F5BE25A2 /* LatencyBadge.swift */,
+				4B13739D3A5101A41E3B8202 /* PowerButtonView.swift */,
+				AE0E268C9C890906900870B9 /* TrafficChartView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		643C781898C6116220A1E423 /* PantoApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92532FDF02A9D7D06F4F753C /* Build configuration list for PBXNativeTarget "PantoApp" */;
+			buildPhases = (
+				A38E9ED03A97CF23E13D5508 /* Sources */,
+				892A84CAD8A5CB64CF12BB64 /* Resources */,
+				E6B2F27FAE3F2FABE3EAE871 /* Frameworks */,
+				86EE172DD8CD3E1E7F3CD254 /* Embed Foundation Extensions */,
+				CC006EDD59964A03CDB6CF73 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C03DAF5D547DA0CDA7647538 /* PBXTargetDependency */,
+				BFC36B8C75DA51BAC7BB9BA3 /* PBXTargetDependency */,
+			);
+			name = PantoApp;
+			packageProductDependencies = (
+			);
+			productName = PantoApp;
+			productReference = C8EA098041F6DE3B0169E763 /* PantoApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		84AA6ADD389C9382CC6190BB /* PantoTunnel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06F92B93E9F780965179052B /* Build configuration list for PBXNativeTarget "PantoTunnel" */;
+			buildPhases = (
+				3E12CBA0D7350BDBE45489FF /* Sources */,
+				8FFC4EE15F8E69AE4489D9AC /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E30858F077BF369EDD2E855 /* PBXTargetDependency */,
+			);
+			name = PantoTunnel;
+			packageProductDependencies = (
+			);
+			productName = PantoTunnel;
+			productReference = 8A914A6B4221613B9AE40AEC /* PantoTunnel.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		9E7F1C9C6B0DF6A2B7A01BC6 /* PantoShared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9E87B8AE55E107E176740A6 /* Build configuration list for PBXNativeTarget "PantoShared" */;
+			buildPhases = (
+				2B5C4BCB080AFE5E1E384729 /* Sources */,
+				0A9B23B3A5762FA46FCA3765 /* Copy Swift Objective-C Interface Header */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PantoShared;
+			packageProductDependencies = (
+			);
+			productName = PantoShared;
+			productReference = 5A6A1196B2CC669BEFE912CC /* libPantoShared.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		53B5B819E73723B22B6AC45E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 4F26110B4B9AAE8CCA4650D4 /* Build configuration list for PBXProject "Panto" */;
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				"zh-Hans",
+			);
+			mainGroup = 984736B81772C1F3D17B47F6;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 0E5892EDB90667F894E6385E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9E7F1C9C6B0DF6A2B7A01BC6 /* PantoShared */,
+				84AA6ADD389C9382CC6190BB /* PantoTunnel */,
+				643C781898C6116220A1E423 /* PantoApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		892A84CAD8A5CB64CF12BB64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47B534FDD40C87125ADB77C /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A9B23B3A5762FA46FCA3765 /* Copy Swift Objective-C Interface Header */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(DERIVED_SOURCES_DIR)/$(SWIFT_OBJC_INTERFACE_HEADER_NAME)",
+			);
+			name = "Copy Swift Objective-C Interface Header";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/include/$(PRODUCT_MODULE_NAME)/$(SWIFT_OBJC_INTERFACE_HEADER_NAME)",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ditto \"${SCRIPT_INPUT_FILE_0}\" \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2B5C4BCB080AFE5E1E384729 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68D32C030F26CA5F601644E4 /* AppGroupConstants.swift in Sources */,
+				74D938AEE5AFE97DC6451BFD /* IPCMessage.swift in Sources */,
+				C23E91DD22F4D8D27E718EF6 /* IPCPantoClient.swift in Sources */,
+				52E62A251CAF03447524EE7A /* MockPantoClient.swift in Sources */,
+				4760BA7887F3B7541D048B50 /* Models.swift in Sources */,
+				725EBC67CCAA408D68992672 /* PantoClientProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E12CBA0D7350BDBE45489FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB93A5AFDF3CBA2E42B26D0E /* MemoryWatchdog.swift in Sources */,
+				CECFAA84FDBF133F88FD7E48 /* PacketTunnelProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A38E9ED03A97CF23E13D5508 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C2A1EDEA7EFC16F90F52390 /* App.swift in Sources */,
+				3C37EFC98ACBFF8C208E62ED /* AppState.swift in Sources */,
+				AE89A526693CEB7B32043807 /* DashboardView.swift in Sources */,
+				743870232E3E7551CF3F93D1 /* GroupsView.swift in Sources */,
+				7DF0B7ED4331BBD8F12680AF /* LanguageManager.swift in Sources */,
+				51039E707C4258248FFB04DA /* LatencyBadge.swift in Sources */,
+				3350AE12DB5CCE1A8C82B2D7 /* MagicIPConflictSheet.swift in Sources */,
+				D7BB83727A109C29F3E5F640 /* MainTabView.swift in Sources */,
+				D54CCC91344C619B051E28AF /* PowerButtonView.swift in Sources */,
+				03AE3A916CD9DB5C4084B0CD /* ProStore.swift in Sources */,
+				2078013B5B300F7E668FA82D /* ProUpgradeView.swift in Sources */,
+				8B861B040A29874BB4ABF871 /* ProbeView.swift in Sources */,
+				BEF3995F03BF220DE1337C18 /* SettingsView.swift in Sources */,
+				F207266CB917A5AD9CF2690F /* TopologyView.swift in Sources */,
+				3514E3139C7F2B5FBA3F88C1 /* TrafficChartView.swift in Sources */,
+				DECAC46A51C95ABEB1EC43D5 /* VPNManager.swift in Sources */,
+				3C2A6769E67692830740C009 /* VirtualInterfacesSheet.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8E30858F077BF369EDD2E855 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E7F1C9C6B0DF6A2B7A01BC6 /* PantoShared */;
+			targetProxy = 9D3A89FC7ACBE2D88E5985DE /* PBXContainerItemProxy */;
+		};
+		BFC36B8C75DA51BAC7BB9BA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84AA6ADD389C9382CC6190BB /* PantoTunnel */;
+			targetProxy = 7AAEC9D099DB9B37EE97ACA3 /* PBXContainerItemProxy */;
+		};
+		C03DAF5D547DA0CDA7647538 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E7F1C9C6B0DF6A2B7A01BC6 /* PantoShared */;
+			targetProxy = 53E24109950111000C9B2352 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		17714931EA369D7B70EB90F6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD0C02A94E35E3787626FA23 /* en */,
+				5176794743022D3E31C0459A /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		018B8BFD0E7F6C5359DE0C84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.panto.ios.PantoShared;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		273F4129BAEF0E5E6055FF87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		57981568BBFBF6983C299B2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PantoApp/PantoApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"Frameworks\"",
+				);
+				INFOPLIST_FILE = PantoApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.panto.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6B3337458FAC0291F88C2111 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PantoTunnel/PantoTunnel.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"Frameworks\"",
+				);
+				INFOPLIST_FILE = PantoTunnel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.panto.ios.PantoTunnel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8CA8E6824AE18683261442DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PantoApp/PantoApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"Frameworks\"",
+				);
+				INFOPLIST_FILE = PantoApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.panto.ios;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9995161E8D1A7B17E6C0EF51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B8C323633B4444BAAAD46907 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.panto.ios.PantoShared;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CF8E5B58F16594819AA15CA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PantoTunnel/PantoTunnel.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"Frameworks\"",
+				);
+				INFOPLIST_FILE = PantoTunnel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.panto.ios.PantoTunnel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06F92B93E9F780965179052B /* Build configuration list for PBXNativeTarget "PantoTunnel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF8E5B58F16594819AA15CA3 /* Debug */,
+				6B3337458FAC0291F88C2111 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4F26110B4B9AAE8CCA4650D4 /* Build configuration list for PBXProject "Panto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9995161E8D1A7B17E6C0EF51 /* Debug */,
+				273F4129BAEF0E5E6055FF87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		92532FDF02A9D7D06F4F753C /* Build configuration list for PBXNativeTarget "PantoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CA8E6824AE18683261442DC /* Debug */,
+				57981568BBFBF6983C299B2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D9E87B8AE55E107E176740A6 /* Build configuration list for PBXNativeTarget "PantoShared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				018B8BFD0E7F6C5359DE0C84 /* Debug */,
+				B8C323633B4444BAAAD46907 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 53B5B819E73723B22B6AC45E /* Project object */;
+}

@@ -32,13 +32,43 @@ public struct IPCRequest: Codable {
         return IPCRequest(action: "select-group", payload: data)
     }
 
-    public static func setMode(mode: String, globalTarget: String? = nil) -> IPCRequest? {
+    public static func setMode(mode: String, globalExit: String? = nil, globalTarget: String? = nil) -> IPCRequest? {
         var dict: [String: Any] = ["mode": mode]
-        if let target = globalTarget {
-            dict["global_target"] = target
+        let exit = globalExit ?? globalTarget
+        if let exit = exit {
+            dict["global_exit"] = exit
+            dict["global_target"] = exit
         }
         guard let data = try? JSONSerialization.data(withJSONObject: dict) else { return nil }
         return IPCRequest(action: "mode", payload: data)
+    }
+
+    public static func rules() -> IPCRequest {
+        return IPCRequest(action: "rules")
+    }
+
+    public static func matchRule(domain: String? = nil, ip: String? = nil, port: Int? = nil, network: String? = nil) -> IPCRequest? {
+        var dict: [String: Any] = [:]
+        if let domain = domain { dict["domain"] = domain }
+        if let ip = ip { dict["ip"] = ip }
+        if let port = port { dict["port"] = port }
+        if let network = network { dict["network"] = network }
+        guard let data = try? JSONSerialization.data(withJSONObject: dict) else { return nil }
+        return IPCRequest(action: "match-rule", payload: data)
+    }
+
+    public static func observationConsents() -> IPCRequest {
+        return IPCRequest(action: "observation-consents")
+    }
+
+    public static func decideObservationConsent(endpointId: String, allow: Bool, remember: Bool) -> IPCRequest? {
+        let dict: [String: Any] = [
+            "endpoint_id": endpointId,
+            "allow": allow,
+            "remember": remember
+        ]
+        guard let data = try? JSONSerialization.data(withJSONObject: dict) else { return nil }
+        return IPCRequest(action: "observation-consent-decide", payload: data)
     }
 }
 

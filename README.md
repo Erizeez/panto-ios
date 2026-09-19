@@ -2,9 +2,9 @@
 
 <div align="center">
 
-**现代、优雅、高性能的 iOS 多协议可编程隧道编排客户端**
+**现代、优雅、高性能的 iOS 多协议可编程隧道编排客户端 (v0.1.0-alpha)**
 
-[架构文档](../docs/architecture.md) | [开源协议声明](LICENSE) | [主引擎仓库](https://github.com/Erizeez/panto)
+[架构文档](https://github.com/Erizeez/panto) | [开源协议声明](LICENSE) | [主引擎仓库](https://github.com/Erizeez/panto)
 
 </div>
 
@@ -19,9 +19,9 @@
 │                        panto-ios 客户端工程架构                        │
 │                                                                        │
 │  【Process 1: PantoApp (主应用 - SwiftUI)】                            │
-│    • 状态看板、动态折线图、策略组手动选择器                            │
-│    • StoreKit 2 终身买断 Pro 状态管理 (org.panto.ios.lifetime_pro)     │
-│    • 敏感配置加密与 iCloud Drive 多设备协同                            │
+│    • 状态看板、点阵吞吐频谱、策略组手动选择器、DAG 链路拓扑可视化     │
+│    • 全球站点连通性测试 (Probe Sites)、Magic IP 冲突仲裁裁决面板       │
+│    • 出站安全观测遥测授权 (Observation Consents) 确认流                │
 │    • 版权属性: 独立专有商业所有权 (或 MIT 宽松开源)                   │
 │                                                                        │
 │                      ▲                          │                      │
@@ -29,9 +29,9 @@
 │                      │                          ▼                      │
 │                                                                        │
 │  【Process 2: PantoTunnel (网络扩展 - NetworkExtension)】              │
-│    • 系统级 PacketTunnelProvider 隧道接管                              │
-│    • 嵌入 PantoKit.xcframework 静态库 (Go 核心引擎)                    │
-│    • 15MB 内存限制主动防御看门狗 (MemoryWatchdog)                      │
+│    • 系统级 PacketTunnelProvider 隧道接管与 utun 虚拟网卡驱动          │
+│    • 嵌入 PantoKit.xcframework 原生静态库 (Rust 高性能零 GC 引擎)       │
+│    • 15MB 内存硬红线主动防御看门狗 (MemoryWatchdog，实测常驻仅 2~3MB)   │
 │    • 版权属性: GPL-3.0 with Apple App Store Exception                  │
 └────────────────────────────────────────────────────────────────────────┘
 ```
@@ -42,39 +42,72 @@
 
 ---
 
+## 📱 模拟器 vs 真机运行边界
+
+| 维度 | iOS 模拟器 (Simulator) | iPhone 真实设备 (Device) |
+| :--- | :--- | :--- |
+| **主 App (SwiftUI)** | ✅ 完整支持，所有界面、图表、测速完全可用 | ✅ 完整支持 |
+| **开发者证书签名** | 🟢 **免签名**（无需配置 Apple Team / 证书） | 🔑 **必需** 具备 Personal Team 或付费开发者账号 |
+| **数据与交互体验** | ⚡ 内置高保真 Mock 数据与平滑波形模拟，极速调试 | 🚀 联动后台 Network Extension 真实 IPC 通信 |
+| **系统级 VPN 隧道接管** | ⚠️ 不支持（苹果模拟器内核无 `utun` 路由驱动限制） | ✅ **完整接管**（点亮系统状态栏 `VPN` 图标） |
+| **适用场景** | 界面迭代、动画打磨、功能逻辑验证、脱机单测 | 全链路流量代理、真实网络打流、15MB 内存压力实测 |
+
+---
+
 ## 📁 目录结构
 
 ```
-ios/
+panto-ios/
 ├── LICENSE                     # 双重许可与 App Store 例外条款声明
 ├── README.md                   # 本文件
-├── Package.swift               # Swift Package Manager 依赖清单
-├── Shared/                     # 双 Target 共享代码
+├── project.yml                 # XcodeGen 工程配置文件 (生成 Panto.xcodeproj)
+├── Package.swift               # Swift Package Manager (用于单元测试与 PantoShared)
+├── Frameworks/
+│   └── PantoKit.xcframework    # Rust 编译输出的 Apple XCFramework (支持真机与模拟器)
+├── Shared/                     # 双 Target 共享代码与模型
+│   ├── Models.swift            # 对齐 OpenAPI 3.0.3 规范的数据模型
+│   ├── PantoClientProtocol.swift # 客户端标准服务协议
+│   ├── MockPantoClient.swift   # 高保真内存 Mock 客户端 (用于脱机/预览)
+│   ├── IPCPantoClient.swift    # 基于系统 IPC 的真实通信客户端
 │   ├── IPCMessage.swift        # 强类型 IPC 请求与响应协议
 │   └── AppGroupConstants.swift # App Group 与 Keychain 标识符
 ├── PantoTunnel/                # 【Target 1: 系统网络扩展 (Extension)】
-│   ├── PacketTunnelProvider.swift # 隧道生命周期管理与 IPC 路由
-│   └── MemoryWatchdog.swift    # 15MB 内存看门狗与 GC 触发器
+│   ├── PacketTunnelProvider.swift # 隧道生命周期管理与 IPC 路由转发
+│   └── MemoryWatchdog.swift    # 15MB 内存物理防御看门狗
 └── PantoApp/                   # 【Target 2: 主应用 (SwiftUI)】
-    ├── App.swift               # 应用入口
-    ├── Store/                  # StoreKit 2 一次性买断 Pro 状态模型
+    ├── App.swift               # 应用主入口
+    ├── Store/                  # StoreKit 2 Pro 状态管理
     ├── Tunnel/                 # VPNManager 系统隧道连接管理器
-    └── Views/                  # 现代化 SwiftUI 仪表盘视图
+    ├── ViewModels/             # AppState 全局状态管理机
+    └── Views/                  # 现代化 SwiftUI 仪表盘视图集
 ```
 
 ---
 
-## 🛠️ 构建与调试指南
+## 🛠️ 构建与运行指南
 
-### 1. 编译底座 PantoKit.xcframework
-在项目根目录下执行脚本，通过 `gomobile bind` 生成专为 iOS 裁剪的静态框架：
+### 1. 命令行运行单元测试
+无需启动 Xcode，在终端一秒完成模型校验与逻辑测试：
 ```bash
-./scripts/build-xcframework.sh
+swift test
 ```
-该脚本会自动将编译产物注入到 `ios/PantoKit/PantoKit.xcframework`。
 
-### 2. 在 Xcode 中打开并运行
-1. 使用 Xcode 打开 `ios/` 目录或直接将该目录作为 Swift Package 载入；
-2. 为 `PantoApp` 与 `PantoTunnel` 分别配置有效的 Apple Developer 签名证书；
-3. 勾选 App Sandbox 与 `Network Extensions` (`Packet Tunnel`) Capabilities；
-4. 选择 iOS 真机或模拟器，一键编译运行！
+### 2. 生成并构建 Xcode 工程
+本项目采用 `xcodegen` 管理工程配置，执行：
+```bash
+# 1. 重新生成 Xcode 工程
+xcodegen generate
+
+# 2. 编译 iOS 模拟器 Debug 版本 (免签名)
+xcodebuild build -project Panto.xcodeproj -scheme PantoApp -destination "generic/platform=iOS Simulator" -configuration Debug ARCHS=arm64 CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+
+# 3. 编译 iOS 真机 Release 版本
+xcodebuild build -project Panto.xcodeproj -scheme PantoApp -destination "generic/platform=iOS" -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+```
+
+### 3. 在 Xcode 中运行
+1. 双击打开 `Panto.xcodeproj`；
+2. 选择 Scheme 为 `PantoApp`；
+3. 选择任一 **iOS 模拟器**（如 iPhone 16 / iPhone 15 Pro），点击 **Run (⌘R)**，即可免签秒级启动并体验所有功能；
+4. 若连接 **真机 iPhone**，请在 Target 的 `Signing & Capabilities` 中选定你的 Apple 开发者 Team，点击 **Run** 即可安装到手机并安装系统 VPN Profile。
+

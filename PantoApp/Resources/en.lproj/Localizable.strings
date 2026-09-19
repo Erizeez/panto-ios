@@ -1,0 +1,162 @@
+/* 
+  Localizable.strings (English)
+  Panto
+*/
+
+/* General */
+"PANTO" = "PANTO";
+"连接" = "Connect";
+"已连接" = "Connected";
+"连接中" = "Connecting";
+"断开中" = "Disconnecting";
+"重连中" = "Reconnecting";
+"%d 冲突" = "%d Conflicts";
+"冲突" = "Conflict";
+"完成" = "Done";
+"取消" = "Cancel";
+"确定" = "OK";
+"升级" = "Upgrade";
+
+/* Tab Bar */
+"仪表盘" = "Dashboard";
+"拓扑图" = "Topology";
+"策略组" = "Groups";
+"全球测速" = "Probe";
+"设置" = "Settings";
+
+/* Dashboard Status & Mode */
+"隧道接管中" = "Tunnel Active";
+"正在建立连接..." = "Establishing Connection...";
+"正在断开..." = "Disconnecting...";
+"网络切换重连中..." = "Reasserting Connection...";
+"隧道未连接" = "Tunnel Disconnected";
+"持续 %@" = "Uptime %@";
+"规则分流" = "Rule";
+"全局代理" = "Global";
+"直连模式" = "Direct";
+"规则" = "Rule";
+"全局" = "Global";
+"直连" = "Direct";
+
+/* Transfer Rate Monitor (Throughput) */
+"上下行速率" = "Transfer Rate";
+"速率监控" = "Throughput";
+"上行" = "Up";
+"下行" = "Down";
+"↑ 上行" = "↑ Up";
+"↓ 下行" = "↓ Down";
+"历史" = "History";
+"实时" = "Real-time";
+"低载" = "Low";
+"满载" = "Peak";
+
+/* Dashboard Metrics */
+"活跃拓扑节点" = "Active Endpoints";
+"分流匹配规则" = "Routing Rules";
+"虚拟接口 IP" = "Virtual Interface IP";
+"看门狗内存" = "Watchdog Memory";
+"%d 个" = "%d";
+"%d 条" = "%d";
+
+/* Pro Banner & Upgrade */
+"Panto Pro 终身尊享版" = "Panto Pro Lifetime";
+"解锁 Underlay Chain 无限制嵌套与自适应 K8s 调度" = "Unlock unlimited Underlay Chain nesting & adaptive K8s scheduling";
+"Panto 基础开源版" = "Panto Community Edition";
+"全功能已解锁 · 无限制 Underlay 嵌套" = "All features unlocked · Unlimited Underlay nesting";
+"支持买断升级，支持家庭共享" = "One-time purchase · Family Sharing supported";
+"解锁 Panto Pro 终身尊享版" = "Unlock Panto Pro Lifetime";
+"一次买断 · 永久升级 · 享受未来所有大版本更新" = "One-time purchase · Lifetime access · All future updates included";
+"恢复已购买项目" = "Restore Purchases";
+"立即解锁" = "Unlock Now";
+"购买中..." = "Purchasing...";
+"已购买" = "Purchased";
+
+/* Connectivity Probe */
+"连通性探测" = "Connectivity Probe";
+"重新测速" = "Retest";
+"测速中..." = "Testing...";
+"滑动定位" = "Slide to locate";
+"全部" = "All";
+"开发平台" = "Dev Platforms";
+"网络基础设施" = "Infrastructure";
+"AI 基础设施" = "AI Infra";
+"国际媒体" = "Global Media";
+"校园内网" = "Campus Net";
+"国内直连" = "Direct Domestic";
+"国内主流" = "Domestic";
+"海外服务" = "Global";
+"AI 大模型" = "AI Models";
+"开发者" = "Developer";
+"异常节点" = "Anomalies";
+"未测试" = "Untested";
+"异常" = "Failed";
+"响应超时 (>1500ms)" = "Response Timeout (>1500ms)";
+"直连节点" = "Direct Node";
+"代理转发" = "Proxy Route";
+
+/* Groups & Scheduler */
+"策略调度组" = "Policy Groups";
+"全部测速" = "Speed Test All";
+"K8s 纯函数调度管道" = "K8s Scheduler Pipeline";
+"遵循 Filter (存活过滤) ➔ Score (延时权重打分) ➔ Pick (优选绑定) 哲学" = "Filter (liveness) ➔ Score (latency weighting) ➔ Pick (binding) workflow";
+"节点延迟" = "Node Latency";
+"未测速" = "Untested";
+
+/* Topology DAG */
+"链路拓扑 (DAG)" = "Link Topology (DAG)";
+"Underlay Chain 多层嵌套" = "Underlay Chain Multi-nesting";
+"单 VPN 槽位下透明编排 IKEv2、Tailscale 与代理隧道，按层展开线性链。" = "Transparently orchestrate IKEv2, Tailscale, and proxy tunnels within a single VPN slot.";
+"暂无拓扑数据" = "No topology data";
+"请确保隧道已连接以拉取实时 DAG" = "Connect tunnel to pull active DAG";
+"刷新" = "Refresh";
+
+/* Settings & Diagnostics */
+"设置与诊断" = "Settings & Diagnostics";
+"语言" = "Language";
+"应用语言" = "App Language";
+"跟随系统" = "System Default";
+"简体中文" = "Simplified Chinese";
+"English" = "English";
+"开发者与调试选项" = "Developer & Debugging";
+"启用脱机模拟客户端 (Mock Mode)" = "Enable Offline Mock Client";
+"在底层内核未编译或无 VPN权限时使用高保真模拟数据" = "Use high-fidelity mock data when kernel is unavailable or lacking VPN permission";
+"手动刷新所有状态" = "Manually Refresh All State";
+"系统环境与内核底座" = "System Environment & Kernel";
+"核心版本" = "Core Version";
+"数据面架构" = "Datapath Architecture";
+"App Group" = "App Group";
+"Extension ID" = "Extension ID";
+"合规与开源协议" = "Compliance & Open Source";
+"Panto 客户端遵循双进程物理隔离与 IPC 防火墙架构：主应用独立专有，Network Extension 遵循 GPL-3.0 with App Store Exception，保障合规与用户隐私。" = "Panto adopts a dual-process architecture with IPC isolation: the main app is proprietary while Network Extension follows GPL-3.0 with App Store Exception.";
+
+/* Magic IP Conflict */
+"Tailscale Magic IP 冲突" = "Tailscale Magic IP Conflict";
+"多个 Tailnet 设备声明了相同虚拟 IP 地址。请指定数据包的首选下一跳目的地。" = "Multiple Tailnet devices claimed the same virtual IP. Specify the preferred next-hop destination.";
+"冲突地址:" = "Conflicted IP:";
+"候选目的端点 (按优先级排序)" = "Candidate Endpoints (Priority Sorted)";
+"记住此决策 (写入规则持久化)" = "Remember this decision (persist to rules)";
+"立即生效裁决" = "Apply Decision";
+
+/* Virtual Network Interfaces */
+"虚拟网络接口" = "Virtual Interfaces";
+"%d 个接口就绪" = "%d Interfaces Ready";
+"完成" = "Done";
+"多网络接口融合架构" = "Unified Multi-Network Architecture";
+"在 iOS 单一 VPN 槽位限制下，Panto 在用户态同时融合 Tailscale Mesh、多 Underlay 节点与本地 TUN。" = "Under iOS's single VPN slot constraint, Panto seamlessly unifies Tailscale Mesh, multiple Underlay tunnels, and local TUN in userspace.";
+"Tailscale CGNAT" = "Tailscale CGNAT";
+"Underlay 隧道" = "Underlay Tunnel";
+"iOS 系统网卡" = "iOS System utun";
+"IPv4 虚拟地址" = "IPv4 Virtual Address";
+"IPv6 虚拟地址" = "IPv6 Virtual Address";
+"子网段 / 掩码:" = "Subnet / Mask:";
+"复制" = "Copy";
+"已复制" = "Copied";
+"为什么在设置中只能看到一个 VPN？" = "Why is only one VPN visible in Settings?";
+"Apple iOS 操作系统对所有第三方网络工具执行单一 TUN 网卡策略。Panto 在这单个系统网卡底层构建了高性能用户态路由栈，使得 Tailscale 节点互访与多云节点互联可以在同一个 App 内并发运行，无需在系统设置中反复切换。" = "Apple iOS enforces a strict single TUN adapter policy for all network extensions. Panto implements a high-performance userspace routing stack beneath this single adapter, enabling simultaneous Tailscale peer connectivity and multi-cloud overlays without toggling system VPN slots.";
+"Tailnet 设备全局唯一 Magic IP，用于跨网穿透、SSH 与局域网服务互访" = "Global unique Magic IP for cross-network NAT traversal, SSH, and LAN service discovery.";
+"当前活动出站节点在远端 VPN 协议中分配的隧道内网地址" = "Internal tunnel IP assigned by the remote WireGuard/VPN underlay endpoint.";
+"iOS NetworkExtension 唯一分配的系统虚拟槽位，负责将系统出站流量转入 Panto" = "Exclusive system virtual slot allocated by iOS NetworkExtension to redirect outbound traffic to Panto.";
+"iOS 系统网卡 (utun)" = "iOS System TUN (utun)";
+"系统网卡" = "System Adapter";
+"iOS NetworkExtension 分配的唯一系统虚拟接口。" = "Single system virtual interface provisioned by iOS NetworkExtension.";
+
