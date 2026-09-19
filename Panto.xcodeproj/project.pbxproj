@@ -31,10 +31,12 @@
 		872EF778A207DE7959C11F11 /* PantoTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8A914A6B4221613B9AE40AEC /* PantoTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8B861B040A29874BB4ABF871 /* ProbeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D3CFF28817751A1509197 /* ProbeView.swift */; };
 		92145B9AC772E0EC98835070 /* libPantoShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6A1196B2CC669BEFE912CC /* libPantoShared.a */; };
+		9D10E788FDBCE53DCADDCD24 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7108AC3D482F3D09B4D4ED1 /* ProfileManager.swift */; };
 		A05DA2732D40721EB5F2C56F /* DeepLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6D0E100F3F0FFE2537F993 /* DeepLinkParser.swift */; };
 		AC80F299AFBD35D5B88C7EA1 /* ImportConfirmationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567FBF18BD092C3484739A8E /* ImportConfirmationSheet.swift */; };
 		AE89A526693CEB7B32043807 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B19A002D2E756F4779F004C /* DashboardView.swift */; };
 		BEF3995F03BF220DE1337C18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04234F97DE15CA350BB84515 /* SettingsView.swift */; };
+		C10D6FD1DDED182407565987 /* ProfilesManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43EB3E5391CC5C9B453484D /* ProfilesManagerView.swift */; };
 		C23E91DD22F4D8D27E718EF6 /* IPCPantoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1FF99E7FB9F93B517155E /* IPCPantoClient.swift */; };
 		CECFAA84FDBF133F88FD7E48 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC86C83CA5EE59EA12C38A19 /* PacketTunnelProvider.swift */; };
 		D47B534FDD40C87125ADB77C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17714931EA369D7B70EB90F6 /* Localizable.strings */; };
@@ -130,8 +132,10 @@
 		BEAF4D412697E521B90A7861 /* TopologyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopologyView.swift; sourceTree = "<group>"; };
 		BFD0E0EAD44DED0E78DA14FF /* ConfigProfileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigProfileParser.swift; sourceTree = "<group>"; };
 		BFD7874A1636379C54F707F1 /* ProUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeView.swift; sourceTree = "<group>"; };
+		C43EB3E5391CC5C9B453484D /* ProfilesManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesManagerView.swift; sourceTree = "<group>"; };
 		C8EA098041F6DE3B0169E763 /* PantoApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PantoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0C02A94E35E3787626FA23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E7108AC3D482F3D09B4D4ED1 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		E92B536B7C8B261730E7FDF5 /* IPCMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCMessage.swift; sourceTree = "<group>"; };
 		F178F14207DB5D28F1272AAF /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -212,6 +216,7 @@
 				0D656BE8F1DFB6A6562CC403 /* MockPantoClient.swift */,
 				B4994788BEA41EAE19E3F2FC /* Models.swift */,
 				49A7535CBDC758C95039FB0B /* PantoClientProtocol.swift */,
+				E7108AC3D482F3D09B4D4ED1 /* ProfileManager.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 				77F6D5DAB232F8C55485332D /* MagicIPConflictSheet.swift */,
 				28CD11E961555AD32F971724 /* MainTabView.swift */,
 				065D3CFF28817751A1509197 /* ProbeView.swift */,
+				C43EB3E5391CC5C9B453484D /* ProfilesManagerView.swift */,
 				BFD7874A1636379C54F707F1 /* ProUpgradeView.swift */,
 				04234F97DE15CA350BB84515 /* SettingsView.swift */,
 				BEAF4D412697E521B90A7861 /* TopologyView.swift */,
@@ -371,15 +377,15 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					643C781898C6116220A1E423 = {
-						DevelopmentTeam = LMN7J83U7H;
+						DevelopmentTeam = 9S948B2LF8;
 						ProvisioningStyle = Automatic;
 					};
 					84AA6ADD389C9382CC6190BB = {
-						DevelopmentTeam = LMN7J83U7H;
+						DevelopmentTeam = 9S948B2LF8;
 						ProvisioningStyle = Automatic;
 					};
 					9E7F1C9C6B0DF6A2B7A01BC6 = {
-						DevelopmentTeam = LMN7J83U7H;
+						DevelopmentTeam = 9S948B2LF8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -450,6 +456,7 @@
 				52E62A251CAF03447524EE7A /* MockPantoClient.swift in Sources */,
 				4760BA7887F3B7541D048B50 /* Models.swift in Sources */,
 				725EBC67CCAA408D68992672 /* PantoClientProtocol.swift in Sources */,
+				9D10E788FDBCE53DCADDCD24 /* ProfileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +486,7 @@
 				03AE3A916CD9DB5C4084B0CD /* ProStore.swift in Sources */,
 				2078013B5B300F7E668FA82D /* ProUpgradeView.swift in Sources */,
 				8B861B040A29874BB4ABF871 /* ProbeView.swift in Sources */,
+				C10D6FD1DDED182407565987 /* ProfilesManagerView.swift in Sources */,
 				BEF3995F03BF220DE1337C18 /* SettingsView.swift in Sources */,
 				F207266CB917A5AD9CF2690F /* TopologyView.swift in Sources */,
 				3514E3139C7F2B5FBA3F88C1 /* TrafficChartView.swift in Sources */,
@@ -571,7 +579,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = LMN7J83U7H;
+				DEVELOPMENT_TEAM = 9S948B2LF8;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;
@@ -706,7 +714,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = LMN7J83U7H;
+				DEVELOPMENT_TEAM = 9S948B2LF8;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = x86_64;

@@ -250,4 +250,31 @@ final class PantoClientTests: XCTestCase {
         XCTAssertEqual(parsed.rules[0].payload, "ts.net")
         XCTAssertEqual(parsed.rules[0].target, "corp-tailscale")
     }
+
+    func testProfileManagerSmartNamingAndActivation() throws {
+        let pm = ProfileManager.shared
+        
+        let yaml1 = "version: '1'\nendpoints:\n- id: node1\n  kind: direct\n"
+        let p1 = try pm.saveProfile(name: "SJTU-Campus", content: yaml1, sourceURL: "http://example.com/c1", activate: true)
+        XCTAssertEqual(p1.name, "SJTU-Campus")
+        XCTAssertEqual(pm.activeProfile()?.id, p1.id)
+
+        // 验证自动推荐不冲突的名称
+        let suggested = pm.suggestUniqueName(baseName: "SJTU-Campus")
+        XCTAssertEqual(suggested, "SJTU-Campus (2)")
+
+        let yaml2 = "version: '1'\nendpoints:\n- id: node2\n  kind: direct\n"
+        let p2 = try pm.saveProfile(name: suggested, content: yaml2, sourceURL: "http://example.com/c2", activate: false)
+        XCTAssertEqual(p2.name, "SJTU-Campus (2)")
+        // p1 仍然是激活项
+        XCTAssertEqual(pm.activeProfile()?.id, p1.id)
+
+        // 切换激活到 p2
+        try pm.activateProfile(id: p2.id)
+        XCTAssertEqual(pm.activeProfile()?.id, p2.id)
+
+        // 清理测试产生的数据
+        try pm.deleteProfile(id: p1.id)
+        try pm.deleteProfile(id: p2.id)
+    }
 }

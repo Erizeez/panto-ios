@@ -17,13 +17,20 @@ public enum AppGroupConstants {
     /// 隧道默认配置名称。
     public static let defaultTunnelName = "Panto Tunnel"
 
-    /// 获取共享容器或本地沙盒的配置存储路径
-    public static var sharedConfigURL: URL? {
+    /// 获取具有物理写入权限的基础沙盒或 App Group 共享容器路径
+    public static var containerBaseURL: URL? {
         if let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroupID) {
-            return container.appendingPathComponent("config.yaml")
+            if (try? FileManager.default.createDirectory(at: container, withIntermediateDirectories: true)) != nil {
+                return container
+            }
         }
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return urls.first?.appendingPathComponent("config.yaml")
+        return urls.first
+    }
+
+    /// 获取共享容器或本地沙盒的配置存储路径
+    public static var sharedConfigURL: URL? {
+        return containerBaseURL?.appendingPathComponent("config.yaml")
     }
 
     /// 检查是否存在有效的活动配置文件
@@ -45,6 +52,8 @@ public enum AppGroupConstants {
         guard let url = sharedConfigURL else {
             throw NSError(domain: "org.panto.ios", code: -1, userInfo: [NSLocalizedDescriptionKey: "无法访问应用沙盒存储路径"])
         }
+        let parentDir = url.deletingLastPathComponent()
+        try? FileManager.default.createDirectory(at: parentDir, withIntermediateDirectories: true)
         try content.write(to: url, atomically: true, encoding: .utf8)
     }
 }

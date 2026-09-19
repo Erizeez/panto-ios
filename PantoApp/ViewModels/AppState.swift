@@ -38,6 +38,7 @@ public final class AppState: ObservableObject {
     @Published public var probeResults: [ProbeResultItem] = []
     @Published public var probeSites: [ProbeSite] = []
     @Published public var activeProbingId: String? = nil
+    @Published public var activeProfileName: String = "默认配置".localized
 
     @Published public var trafficHistory: [TrafficPoint] = []
     @Published public var currentUpRate: Int64 = 0
@@ -64,6 +65,7 @@ public final class AppState: ObservableObject {
     public init(vpnManager: VPNManager) {
         self.vpn = vpnManager
         self.client = mockClient // 临时赋值，将在 setupClient 中替换
+        self.activeProfileName = ProfileManager.shared.activeProfile()?.name ?? "默认配置".localized
         setupClient()
 
         // 初始填充微小底噪平直基线
@@ -85,6 +87,7 @@ public final class AppState: ObservableObject {
     }
 
     public func reloadLocalProfile() {
+        self.activeProfileName = ProfileManager.shared.activeProfile()?.name ?? "默认配置".localized
         liveClient.reloadFromLocalConfig()
         Task { await refreshAll() }
     }
@@ -98,6 +101,7 @@ public final class AppState: ObservableObject {
     }
 
     public func refreshAll() async {
+        self.activeProfileName = ProfileManager.shared.activeProfile()?.name ?? "默认配置".localized
         if !useMockMode {
             liveClient.reloadFromLocalConfig()
         }

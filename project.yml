@@ -13,7 +13,7 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    DEVELOPMENT_TEAM: "LMN7J83U7H"
+    DEVELOPMENT_TEAM: "9S948B2LF8"
     CODE_SIGN_STYLE: "Automatic"
     EXCLUDED_ARCHS[sdk=iphonesimulator*]: "x86_64"
     ONLY_ACTIVE_ARCH: "YES"

@@ -31,22 +31,36 @@ public struct SettingsView: View {
 
                 // 2. 配置文件与节点规则
                 Section("配置文件与节点规则".localized) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(hasConfig ? "当前配置已就绪".localized : "暂无已导入配置".localized)
-                                .font(.body)
-                                .fontWeight(.semibold)
-                                .foregroundColor(hasConfig ? .primary : .secondary)
-                            if let summary = configSummary {
-                                Text(summary)
+                    NavigationLink {
+                        ProfilesManagerView(appState: appState)
+                    } label: {
+                        HStack(spacing: 12) {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.accentColor.opacity(0.12))
+                                    .frame(width: 36, height: 36)
+                                Image(systemName: "folder.fill.badge.gearshape")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.accentColor)
+                            }
+
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("配置档案库".localized)
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                Text(currentProfileText)
                                     .font(.caption2)
                                     .foregroundColor(.secondary)
                             }
+
+                            Spacer()
+
+                            let profileCount = ProfileManager.shared.loadManifest().profiles.count
+                            Text(String(format: "%d 套档案".localized, profileCount))
+                                .font(.caption)
+                                .foregroundColor(.secondary)
                         }
-                        Spacer()
-                        Circle()
-                            .fill(hasConfig ? Color.green : Color.orange)
-                            .frame(width: 10, height: 10)
+                        .padding(.vertical, 2)
                     }
 
                     Button {
@@ -59,14 +73,6 @@ public struct SettingsView: View {
                         showingFileImporter = true
                     } label: {
                         Label("从系统文件选取导入".localized, systemImage: "folder")
-                    }
-
-                    if hasConfig {
-                        Button(role: .destructive) {
-                            clearConfig()
-                        } label: {
-                            Label("清空当前配置".localized, systemImage: "trash")
-                        }
                     }
                 }
 
@@ -144,10 +150,12 @@ public struct SettingsView: View {
                     defer { url.stopAccessingSecurityScopedResource() }
                     if let content = try? String(contentsOf: url, encoding: .utf8) {
                         do {
-                            try AppGroupConstants.saveConfig(content)
+                            let baseName = url.deletingPathExtension().lastPathComponent
+                            let suggestedName = ProfileManager.shared.suggestUniqueName(baseName: baseName.isEmpty ? "文件导入" : baseName)
+                            try ProfileManager.shared.saveProfile(name: suggestedName, content: content, sourceURL: url.lastPathComponent, activate: true)
                             updateConfigStatus()
-                            showAlert("成功从文件导入配置文件！")
-                            Task { await appState.refreshAll() }
+                            showAlert("成功导入配置文件「\(suggestedName)」！")
+                            appState.reloadLocalProfile()
                         } catch {
                             showAlert("保存配置失败: \(error.localizedDescription)")
                         }
@@ -163,6 +171,13 @@ public struct SettingsView: View {
                 updateConfigStatus()
             }
         }
+    }
+
+    private var currentProfileText: String {
+        if let active = ProfileManager.shared.activeProfile() {
+            return "当前生效: \(active.name)"
+        }
+        return "暂无已激活档案"
     }
 
     private func updateConfigStatus() {
@@ -181,22 +196,15 @@ public struct SettingsView: View {
             showAlert("剪贴板中未找到文本内容")
             return
         }
+        let suggestedName = ProfileManager.shared.suggestUniqueName(baseName: "剪贴板导入")
         do {
-            try AppGroupConstants.saveConfig(text)
+            try ProfileManager.shared.saveProfile(name: suggestedName, content: text, sourceURL: nil, activate: true)
             updateConfigStatus()
-            showAlert("成功从剪贴板导入配置文件！")
-            Task { await appState.refreshAll() }
+            showAlert("成功从剪贴板导入配置「\(suggestedName)」！")
+            appState.reloadLocalProfile()
         } catch {
             showAlert("保存配置失败: \(error.localizedDescription)")
         }
-    }
-
-    private func clearConfig() {
-        if let url = AppGroupConstants.sharedConfigURL {
-            try? FileManager.default.removeItem(at: url)
-        }
-        updateConfigStatus()
-        showAlert("已清空配置文件")
     }
 
     private func showAlert(_ msg: String) {

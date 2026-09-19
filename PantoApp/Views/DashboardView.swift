@@ -7,11 +7,16 @@ public struct DashboardView: View {
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject private var proStore: ProStore
     @State private var showingProSheet = false
+    @State private var showingProfilesSheet = false
     @State private var isCollapsed = true
     @Namespace private var modeAnimationNamespace
 
     public init(appState: AppState) {
         self.appState = appState
+    }
+
+    private var currentProfileDisplayName: String {
+        return appState.activeProfileName
     }
 
     public var body: some View {
@@ -30,6 +35,9 @@ public struct DashboardView: View {
                             )
                         }
                         .frame(height: 0)
+
+                        // 1.5 配置档案选择条 (支持极速多套配置无缝切换)
+                        profileSelectorStrip
 
                         // 2. 链路概况信息横条 (运行时长 + 虚拟 IP)
                         statusSummaryStrip
@@ -75,6 +83,11 @@ public struct DashboardView: View {
             }
             .sheet(isPresented: $appState.showingVirtualInterfacesSheet) {
                 VirtualInterfacesSheet(appState: appState)
+            }
+            .sheet(isPresented: $showingProfilesSheet) {
+                NavigationView {
+                    ProfilesManagerView(appState: appState)
+                }
             }
         }
     }
@@ -249,6 +262,67 @@ public struct DashboardView: View {
     }
 
     // MARK: - 2. Sections
+
+    /// 配置档案选择条 (支持极速多套配置无缝切换)
+    private var profileSelectorStrip: some View {
+        Button(action: {
+            #if canImport(UIKit)
+            let feedback = UISelectionFeedbackGenerator()
+            feedback.selectionChanged()
+            #endif
+            showingProfilesSheet = true
+        }) {
+            HStack(spacing: 10) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .fill(Color.accentColor.opacity(0.12))
+                        .frame(width: 28, height: 28)
+                    Image(systemName: "doc.text.fill")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(.accentColor)
+                }
+
+                VStack(alignment: .leading, spacing: 2) {
+                    HStack(spacing: 4) {
+                        Text("当前配置档案".localized)
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundColor(.secondary)
+                        let count = ProfileManager.shared.loadManifest().profiles.count
+                        if count > 1 {
+                            Text("(\(count) 套可切换)".localized)
+                                .font(.system(size: 10, weight: .regular))
+                                .foregroundColor(.secondary.opacity(0.8))
+                        }
+                    }
+
+                    Text(currentProfileDisplayName)
+                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                        .foregroundColor(.primary)
+                        .lineLimit(1)
+                }
+
+                Spacer()
+
+                HStack(spacing: 4) {
+                    Text("管理/切换".localized)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.accentColor)
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 11, weight: .semibold))
+                        .foregroundColor(.accentColor.opacity(0.7))
+                }
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color.primary.opacity(0.05), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+    }
 
     /// 紧凑状态概览横条 (点击展示多虚拟网络接口清单)
     private var statusSummaryStrip: some View {
