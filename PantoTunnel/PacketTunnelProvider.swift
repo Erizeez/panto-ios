@@ -9,6 +9,7 @@ import PantoKit
 
 /// PacketTunnelProvider 是 iOS 系统级别的网络扩展守护进程。
 /// 负责接管虚拟网卡 TUN 报文收发，并通过 IPC 承接主应用发来的控制指令。
+@objc(PacketTunnelProvider)
 public class PacketTunnelProvider: NEPacketTunnelProvider {
     private let logger = Logger(subsystem: "org.panto.ios", category: "PacketTunnelProvider")
     private var watchdog: MemoryWatchdog?
@@ -37,13 +38,21 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
             #endif
         }
 
-        // 2. 配置基础网络路由参数
-        let tunnelNetworkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: "127.0.0.1")
+        // 2. 配置基础网络路由参数 (避免使用 127.0.0.1 回环地址触发苹果系统网络设置校验拒绝)
+        let tunnelNetworkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: "10.201.0.1")
         let ipv4Settings = NEIPv4Settings(addresses: ["10.201.0.2"], subnetMasks: ["255.255.255.0"])
         ipv4Settings.includedRoutes = [NEIPv4Route.default()]
+        
+        // 关键防御：排除局域网私网网段，确保本地 10.0.8.0/24 服务与 Wi-Fi 不被黑洞吞噬
+        ipv4Settings.excludedRoutes = [
+            NEIPv4Route(destinationAddress: "10.0.0.0", subnetMask: "255.0.0.0"),
+            NEIPv4Route(destinationAddress: "172.16.0.0", subnetMask: "255.240.0.0"),
+            NEIPv4Route(destinationAddress: "192.168.0.0", subnetMask: "255.255.0.0")
+        ]
         tunnelNetworkSettings.ipv4Settings = ipv4Settings
 
         let dnsSettings = NEDNSSettings(servers: ["1.1.1.1", "8.8.8.8"])
+        dnsSettings.matchDomains = [""]
         tunnelNetworkSettings.dnsSettings = dnsSettings
 
         // 3. 应用网络配置
@@ -132,13 +141,15 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
         switch request.action {
         case "status":
             let uptime = startDate.flatMap { Int(Date().timeIntervalSince($0)) } ?? 0
+            let configYaml = AppGroupConstants.loadConfig() ?? ""
+            let parsed = ConfigProfileParser.parse(yaml: configYaml)
             let payload = StatusPayload(
                 running: isRunning,
                 uptimeSeconds: uptime,
-                activeEndpoints: 1,
-                activeGroups: 1,
-                activeRules: 0,
-                mode: "rule",
+                activeEndpoints: parsed.endpoints.count,
+                activeGroups: parsed.groups.count,
+                activeRules: parsed.rules.count,
+                mode: parsed.mode.rawValue,
                 globalTarget: nil
             )
             let resp = IPCResponse(success: true, data: try? JSONEncoder().encode(payload))

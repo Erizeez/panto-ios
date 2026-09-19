@@ -42,19 +42,16 @@ public final class VPNManager: ObservableObject {
     /// 显式获取或创建系统 VPN 描述文件（触发系统授权弹窗）
     public func prepareTunnelManager() async throws -> NETunnelProviderManager {
         let managers = try await NETunnelProviderManager.loadAllFromPreferences()
-        let manager: NETunnelProviderManager
-        if let existing = managers.first {
-            manager = existing
-        } else {
-            manager = NETunnelProviderManager()
-            let proto = NETunnelProviderProtocol()
-            proto.providerBundleIdentifier = AppGroupConstants.extensionBundleID
-            proto.serverAddress = "127.0.0.1"
-            manager.protocolConfiguration = proto
-            manager.localizedDescription = AppGroupConstants.defaultTunnelName
-        }
-
+        let manager = managers.first ?? NETunnelProviderManager()
+        
+        let proto = (manager.protocolConfiguration as? NETunnelProviderProtocol) ?? NETunnelProviderProtocol()
+        proto.providerBundleIdentifier = AppGroupConstants.extensionBundleID
+        proto.serverAddress = "10.201.0.1"
+        proto.providerConfiguration = ["AppGroup": AppGroupConstants.appGroupID]
+        manager.protocolConfiguration = proto
+        manager.localizedDescription = AppGroupConstants.defaultTunnelName
         manager.isEnabled = true
+
         // 这一步调用 saveToPreferences() 会在首次时触发 iOS 系统 VPN 授权弹窗！
         try await manager.saveToPreferences()
         // 重新从首选项加载以刷新系统级连接对象
@@ -76,7 +73,14 @@ public final class VPNManager: ObservableObject {
             manager = try await prepareTunnelManager()
         }
 
-        if !manager.isEnabled {
+        // 确保描述文件指向最新的 Extension Bundle ID 和正确的网关地址
+        let proto = (manager.protocolConfiguration as? NETunnelProviderProtocol) ?? NETunnelProviderProtocol()
+        if !manager.isEnabled || proto.providerBundleIdentifier != AppGroupConstants.extensionBundleID || proto.serverAddress != "10.201.0.1" {
+            proto.providerBundleIdentifier = AppGroupConstants.extensionBundleID
+            proto.serverAddress = "10.201.0.1"
+            proto.providerConfiguration = ["AppGroup": AppGroupConstants.appGroupID]
+            manager.protocolConfiguration = proto
+            manager.localizedDescription = AppGroupConstants.defaultTunnelName
             manager.isEnabled = true
             try await manager.saveToPreferences()
             try await manager.loadFromPreferences()
@@ -86,7 +90,6 @@ public final class VPNManager: ObservableObject {
             try manager.connection.startVPNTunnel()
             startPollTimer()
         } catch {
-            // 如果由于配置未刷新抛出异常，尝试强制重载并重试一次
             Self.logger.warning("⚠️ 首次启动隧道异常，尝试重新加载首选项: \(error.localizedDescription)")
             try await manager.loadFromPreferences()
             try manager.connection.startVPNTunnel()

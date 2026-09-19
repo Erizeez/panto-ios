@@ -61,6 +61,22 @@ public final class LivePantoClient: PantoClientProtocol, @unchecked Sendable {
             if let st = try? JSONDecoder().decode(SystemStatus.self, from: data) {
                 return st
             }
+            if let sp = try? JSONDecoder().decode(StatusPayload.self, from: data) {
+                lock.lock()
+                defer { lock.unlock() }
+                return SystemStatus(
+                    running: sp.running,
+                    uptimeSeconds: sp.uptimeSeconds,
+                    mixedPort: mixedPort,
+                    mode: sp.mode ?? currentMode.rawValue,
+                    globalExit: sp.globalTarget ?? globalExit,
+                    globalTarget: sp.globalTarget ?? globalExit,
+                    activeEndpoints: max(sp.activeEndpoints, topologyNodes.count),
+                    activeGroups: max(sp.activeGroups, groups.count),
+                    activeRules: max(sp.activeRules, rules.count),
+                    assignedIp: "10.201.0.2"
+                )
+            }
         }
 
         lock.lock()
