@@ -38,21 +38,31 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
             #endif
         }
 
-        // 2. 配置基础网络路由参数 (避免使用 127.0.0.1 回环地址触发苹果系统网络设置校验拒绝)
+        // 2. 配置安全受控的网络路由参数 (避免使用 127.0.0.1 回环地址与盲目 0.0.0.0/0 导致黑洞断网)
         let tunnelNetworkSettings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: "10.201.0.1")
         let ipv4Settings = NEIPv4Settings(addresses: ["10.201.0.2"], subnetMasks: ["255.255.255.0"])
-        ipv4Settings.includedRoutes = [NEIPv4Route.default()]
         
-        // 关键防御：排除局域网私网网段，确保本地 10.0.8.0/24 服务与 Wi-Fi 不被黑洞吞噬
+        // 精准接管 Panto 虚拟 Overlay 网段与受管子网
+        ipv4Settings.includedRoutes = [
+            NEIPv4Route(destinationAddress: "10.201.0.0", subnetMask: "255.255.0.0"),
+            NEIPv4Route(destinationAddress: "100.64.0.0", subnetMask: "255.192.0.0"),
+            NEIPv4Route(destinationAddress: "202.120.0.0", subnetMask: "255.255.0.0"),
+            NEIPv4Route(destinationAddress: "111.186.0.0", subnetMask: "255.255.0.0")
+        ]
+        
+        // 关键防御：排除局域网私网与核心基础设施 IP，确保本地 10.0.8.0/24、Wi-Fi 与测速完全畅通
         ipv4Settings.excludedRoutes = [
             NEIPv4Route(destinationAddress: "10.0.0.0", subnetMask: "255.0.0.0"),
             NEIPv4Route(destinationAddress: "172.16.0.0", subnetMask: "255.240.0.0"),
-            NEIPv4Route(destinationAddress: "192.168.0.0", subnetMask: "255.255.0.0")
+            NEIPv4Route(destinationAddress: "192.168.0.0", subnetMask: "255.255.0.0"),
+            NEIPv4Route(destinationAddress: "1.1.1.1", subnetMask: "255.255.255.255"),
+            NEIPv4Route(destinationAddress: "8.8.8.8", subnetMask: "255.255.255.255")
         ]
         tunnelNetworkSettings.ipv4Settings = ipv4Settings
 
+        // 仅匹配虚拟内部域名，不霸占系统全局 DNS，确保外部公网域名解析 100% 畅通
         let dnsSettings = NEDNSSettings(servers: ["1.1.1.1", "8.8.8.8"])
-        dnsSettings.matchDomains = [""]
+        dnsSettings.matchDomains = ["panto.internal", "ts.net"]
         tunnelNetworkSettings.dnsSettings = dnsSettings
 
         // 3. 应用网络配置

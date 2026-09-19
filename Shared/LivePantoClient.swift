@@ -193,21 +193,33 @@ public final class LivePantoClient: PantoClientProtocol, @unchecked Sendable {
             }
         }
 
-        // 本地发起到目标测速站的真实 HTTP 往返延迟探测 (真实 RTT 测速)
-        let targetUrl = URL(string: url ?? "https://cp.cloudflare.com/generate_204") ?? URL(string: "https://www.apple.com")!
-        let start = Date()
-        var measuredDelay = 35
-        do {
-            var req = URLRequest(url: targetUrl)
-            req.timeoutInterval = Double(timeoutMs ?? 2500) / 1000.0
-            req.httpMethod = "HEAD"
-            let (_, resp) = try await URLSession.shared.data(for: req)
-            if let http = resp as? HTTPURLResponse, (200...399).contains(http.statusCode) {
-                let ms = Int(Date().timeIntervalSince(start) * 1000)
-                measuredDelay = max(10, ms)
+        // 本地发起到目标测速站的真实往返延迟探测 (多源自适应容错 RTT 测速)
+        let config = URLSessionConfiguration.ephemeral
+        config.waitsForConnectivity = false
+        config.timeoutIntervalForRequest = Double(timeoutMs ?? 2500) / 1000.0
+        let session = URLSession(configuration: config)
+
+        let testCandidates = [
+            URL(string: url ?? "https://cp.cloudflare.com/generate_204"),
+            URL(string: "http://captive.apple.com/hotspot-detect.html"),
+            URL(string: "http://connectivitycheck.gstatic.com/generate_204")
+        ].compactMap { $0 }
+
+        var measuredDelay = -1
+        for targetUrl in testCandidates {
+            let start = Date()
+            do {
+                var req = URLRequest(url: targetUrl)
+                req.httpMethod = "HEAD"
+                let (_, resp) = try await session.data(for: req)
+                if let http = resp as? HTTPURLResponse, (200...399).contains(http.statusCode) {
+                    let ms = Int(Date().timeIntervalSince(start) * 1000)
+                    measuredDelay = max(10, ms)
+                    break
+                }
+            } catch {
+                continue
             }
-        } catch {
-            measuredDelay = -1 // 超时或不可达
         }
 
         lock.lock()
