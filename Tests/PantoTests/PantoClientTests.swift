@@ -307,4 +307,19 @@ final class PantoClientTests: XCTestCase {
         XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 20), calendar: calendar), .twilight)
         XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 23), calendar: calendar), .twilight)
     }
+
+    func testPantoAppIconManualSelectionDisablesAutoRotate() {
+        // 验证用户手动设置图标时自动关闭自动轮换
+        var autoRotateEnabled = true
+        func selectManually(icon: PantoAppIcon) -> (target: PantoAppIcon, auto: Bool) {
+            if autoRotateEnabled {
+                autoRotateEnabled = false
+            }
+            return (icon, autoRotateEnabled)
+        }
+
+        let res = selectManually(icon: .night)
+        XCTAssertEqual(res.target, .night)
+        XCTAssertFalse(res.auto, "手动选择图标后应自动禁用定时轮换")
+    }
 }

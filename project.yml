@@ -72,6 +72,7 @@ targets:
     info:
       path: PantoApp/Info.plist
       properties:
+        CFBundleDisplayName: "Panto"
         CFBundleShortVersionString: "0.1.0-alpha"
         CFBundleVersion: "1"
         UIFileSharingEnabled: true
@@ -89,6 +90,7 @@ targets:
         com.apple.security.application-groups:
           - group.org.panto.ios
     settings:
+      PRODUCT_NAME: "Panto"
       PRODUCT_BUNDLE_IDENTIFIER: org.panto.ios
       ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
       ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES: "AppIcon-Day AppIcon-Twilight AppIcon-Night"

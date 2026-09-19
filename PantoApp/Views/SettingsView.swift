@@ -44,7 +44,7 @@ public struct SettingsView: View {
                                 let feedback = UIImpactFeedbackGenerator(style: .light)
                                 feedback.impactOccurred()
                                 #endif
-                                iconManager.applyIcon(icon)
+                                iconManager.selectIconManually(icon)
                             } label: {
                                 VStack(spacing: 6) {
                                     ZStack(alignment: .topTrailing) {

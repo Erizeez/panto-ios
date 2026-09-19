@@ -99,6 +99,14 @@ public final class AppIconManager: ObservableObject {
         }
     }
 
+    /// 手动选择并应用指定图标（将自动关闭按时段自动轮换，避免被系统定时覆盖）
+    public func selectIconManually(_ icon: PantoAppIcon) {
+        if self.autoRotateEnabled {
+            self.autoRotateEnabled = false
+        }
+        applyIcon(icon)
+    }
+
     /// 应用指定图标
     public func applyIcon(_ icon: PantoAppIcon) {
         #if os(iOS)

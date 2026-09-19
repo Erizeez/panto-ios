@@ -54,6 +54,7 @@
 		85BA9C93E15E3498DD45EDBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC7752B9602126BD42F23867 /* Assets.xcassets */; };
 		872EF778A207DE7959C11F11 /* PantoTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8A914A6B4221613B9AE40AEC /* PantoTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8B861B040A29874BB4ABF871 /* ProbeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D3CFF28817751A1509197 /* ProbeView.swift */; };
+		8EFB415C2BDDE26C94D62F7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54B832866D9AFA7EE35946F6 /* InfoPlist.strings */; };
 		904C3D2E2BB963D0F84F8F93 /* AppIcon-Day83.5x83.5@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F96D586DB62108E5AC72893 /* AppIcon-Day83.5x83.5@2x~ipad.png */; };
 		92145B9AC772E0EC98835070 /* libPantoShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6A1196B2CC669BEFE912CC /* libPantoShared.a */; };
 		942EC46890CF802FCDAA2A9F /* AppIcon-Twilight20x20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 93E6B193662E6C775FF94D75 /* AppIcon-Twilight20x20@2x.png */; };
@@ -154,6 +155,7 @@
 		1B19A002D2E756F4779F004C /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		1F7D1C098CCD9460CF0D512C /* AppIcon-Night60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Night60x60@2x.png"; sourceTree = "<group>"; };
 		2014801029E854B906E768B1 /* AppIcon-Night40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Night40x40@2x.png"; sourceTree = "<group>"; };
+		20436A9A40E0490E56B347D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		27B18A1DF304AE65376112F6 /* AppIcon-Twilight40x40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Twilight40x40@3x.png"; sourceTree = "<group>"; };
 		28CD11E961555AD32F971724 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		292F1BAA085EAC12AC4028E3 /* PantoTunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PantoTunnel.entitlements; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		92CC675BE4D81E850037EA59 /* AppIcon-Day@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Day@3x.png"; sourceTree = "<group>"; };
 		93ACEB72EC165B2E47B2D12B /* LivePantoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePantoClient.swift; sourceTree = "<group>"; };
 		93E6B193662E6C775FF94D75 /* AppIcon-Twilight20x20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Twilight20x20@2x.png"; sourceTree = "<group>"; };
+		951CCC1AAF3DB84918D27DCF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		985DDABEA613B82113C87A4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9A5164700ACD9153C2EBC9BC /* AppIcon-Day76x76@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Day76x76@2x~ipad.png"; sourceTree = "<group>"; };
 		9CE2BEF6C225BAE6328F2FC2 /* AppIcon-Twilight20x20@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Twilight20x20@3x.png"; sourceTree = "<group>"; };
@@ -403,6 +406,7 @@
 			children = (
 				AC7752B9602126BD42F23867 /* Assets.xcassets */,
 				00CAE220727AEB03F6387717 /* AppIcons */,
+				54B832866D9AFA7EE35946F6 /* InfoPlist.strings */,
 				17714931EA369D7B70EB90F6 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -608,6 +612,7 @@
 				EBDF770A70A9A7F0CE324A50 /* AppIcon-Twilight@2x.png in Resources */,
 				81EC9A543DBFC9866571626F /* AppIcon-Twilight@3x.png in Resources */,
 				85BA9C93E15E3498DD45EDBF /* Assets.xcassets in Resources */,
+				8EFB415C2BDDE26C94D62F7E /* InfoPlist.strings in Resources */,
 				D47B534FDD40C87125ADB77C /* Localizable.strings in Resources */,
 				95F7EFC781AC16535404876D /* icon_happy_twilight.svg in Resources */,
 				BDA6ACA21798C6D339526A23 /* icon_sleep_night.svg in Resources */,
@@ -721,6 +726,15 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
+		54B832866D9AFA7EE35946F6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20436A9A40E0490E56B347D3 /* en */,
+				951CCC1AAF3DB84918D27DCF /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -821,6 +835,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.panto.ios;
+				PRODUCT_NAME = Panto;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -873,6 +888,7 @@
 					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.panto.ios;
+				PRODUCT_NAME = Panto;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
