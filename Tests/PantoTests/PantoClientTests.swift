@@ -277,4 +277,34 @@ final class PantoClientTests: XCTestCase {
         try pm.deleteProfile(id: p1.id)
         try pm.deleteProfile(id: p2.id)
     }
+
+    func testPantoAppIconScheduledRotation() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+
+        func makeDate(hour: Int) -> Date {
+            var comps = DateComponents()
+            comps.year = 2026
+            comps.month = 9
+            comps.day = 19
+            comps.hour = hour
+            comps.minute = 30
+            return calendar.date(from: comps)!
+        }
+
+        // 1. 00:00 - 08:00 -> Night (暗夜)
+        XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 0), calendar: calendar), .night)
+        XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 3), calendar: calendar), .night)
+        XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 7), calendar: calendar), .night)
+
+        // 2. 08:00 - 16:00 -> Day (白昼)
+        XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 8), calendar: calendar), .day)
+        XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 12), calendar: calendar), .day)
+        XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 15), calendar: calendar), .day)
+
+        // 3. 16:00 - 24:00 -> Twilight (黄昏)
+        XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 16), calendar: calendar), .twilight)
+        XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 20), calendar: calendar), .twilight)
+        XCTAssertEqual(PantoAppIcon.scheduledIcon(for: makeDate(hour: 23), calendar: calendar), .twilight)
+    }
 }

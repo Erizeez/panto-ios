@@ -90,3 +90,6 @@ targets:
           - group.org.panto.ios
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: org.panto.ios
+      ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES: "AppIcon-Day AppIcon-Twilight AppIcon-Night"
+      ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS: "YES"

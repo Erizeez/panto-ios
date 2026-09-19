@@ -5,6 +5,7 @@ public struct SettingsView: View {
     @ObservedObject var appState: AppState
     @EnvironmentObject private var proStore: ProStore
     @ObservedObject private var languageManager = LanguageManager.shared
+    @ObservedObject private var iconManager = AppIconManager.shared
     @State private var showingProSheet = false
     @State private var hasConfig: Bool = AppGroupConstants.hasActiveConfig
     @State private var configSummary: String? = nil
@@ -27,6 +28,75 @@ public struct SettingsView: View {
                                 .tag(lang)
                         }
                     }
+                }
+
+                // 1.5 应用图标与时段轮换
+                Section {
+                    Toggle("按时段自动轮换 (每 8 小时)".localized, isOn: $iconManager.autoRotateEnabled)
+
+                    HStack(spacing: 12) {
+                        ForEach(PantoAppIcon.allCases) { icon in
+                            let isCurrent = iconManager.currentActiveIcon == icon
+                            let isScheduled = iconManager.currentScheduledIcon == icon
+
+                            Button {
+                                #if canImport(UIKit)
+                                let feedback = UIImpactFeedbackGenerator(style: .light)
+                                feedback.impactOccurred()
+                                #endif
+                                iconManager.applyIcon(icon)
+                            } label: {
+                                VStack(spacing: 6) {
+                                    ZStack(alignment: .topTrailing) {
+                                        Image(icon.previewImageName)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 58, height: 58)
+                                            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                                    .stroke(isCurrent ? Color.accentColor : Color.primary.opacity(0.12), lineWidth: isCurrent ? 2.5 : 1)
+                                            )
+                                            .shadow(color: isCurrent ? Color.accentColor.opacity(0.3) : Color.clear, radius: 4, y: 2)
+
+                                        if isCurrent {
+                                            Image(systemName: "checkmark.circle.fill")
+                                                .font(.system(size: 16))
+                                                .foregroundColor(.accentColor)
+                                                .background(Circle().fill(Color.white))
+                                                .offset(x: 4, y: -4)
+                                        }
+                                    }
+
+                                    Text(icon.displayName)
+                                        .font(.system(size: 11, weight: isCurrent ? .bold : .medium))
+                                        .foregroundColor(isCurrent ? .primary : .secondary)
+
+                                    Text(icon.timeRangeDescription)
+                                        .font(.system(size: 9, weight: .regular, design: .monospaced))
+                                        .foregroundColor(.secondary)
+
+                                    if isScheduled {
+                                        Text("当前时段".localized)
+                                            .font(.system(size: 8, weight: .bold))
+                                            .padding(.horizontal, 5)
+                                            .padding(.vertical, 1)
+                                            .background(Color.orange.opacity(0.15))
+                                            .foregroundColor(.orange)
+                                            .clipShape(Capsule())
+                                    }
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 6)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.vertical, 4)
+                } header: {
+                    Text("应用图标与 8 小时轮换".localized)
+                } footer: {
+                    Text("根据时间划分为 3 个 8 小时时段：08:00-16:00 (白昼)、16:00-24:00 (黄昏)、00:00-08:00 (暗夜)。开启自动轮换后，App 将在对应时段自动无缝切换图标。".localized)
                 }
 
                 // 2. 配置文件与节点规则
