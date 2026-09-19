@@ -29,6 +29,8 @@
 		872EF778A207DE7959C11F11 /* PantoTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8A914A6B4221613B9AE40AEC /* PantoTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8B861B040A29874BB4ABF871 /* ProbeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D3CFF28817751A1509197 /* ProbeView.swift */; };
 		92145B9AC772E0EC98835070 /* libPantoShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6A1196B2CC669BEFE912CC /* libPantoShared.a */; };
+		A05DA2732D40721EB5F2C56F /* DeepLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6D0E100F3F0FFE2537F993 /* DeepLinkParser.swift */; };
+		AC80F299AFBD35D5B88C7EA1 /* ImportConfirmationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567FBF18BD092C3484739A8E /* ImportConfirmationSheet.swift */; };
 		AE89A526693CEB7B32043807 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B19A002D2E756F4779F004C /* DashboardView.swift */; };
 		BEF3995F03BF220DE1337C18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04234F97DE15CA350BB84515 /* SettingsView.swift */; };
 		C23E91DD22F4D8D27E718EF6 /* IPCPantoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1FF99E7FB9F93B517155E /* IPCPantoClient.swift */; };
@@ -96,6 +98,7 @@
 		065D3CFF28817751A1509197 /* ProbeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbeView.swift; sourceTree = "<group>"; };
 		0D1259F514217018557297D5 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		0D656BE8F1DFB6A6562CC403 /* MockPantoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPantoClient.swift; sourceTree = "<group>"; };
+		0F6D0E100F3F0FFE2537F993 /* DeepLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkParser.swift; sourceTree = "<group>"; };
 		19F68203330A5C15C7B2D1B1 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1B19A002D2E756F4779F004C /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		28CD11E961555AD32F971724 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -105,6 +108,7 @@
 		49C0B312BC76EFF590581853 /* PantoKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = PantoKit.xcframework; path = Frameworks/PantoKit.xcframework; sourceTree = "<group>"; };
 		4B13739D3A5101A41E3B8202 /* PowerButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerButtonView.swift; sourceTree = "<group>"; };
 		5176794743022D3E31C0459A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		567FBF18BD092C3484739A8E /* ImportConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportConfirmationSheet.swift; sourceTree = "<group>"; };
 		5A6A1196B2CC669BEFE912CC /* libPantoShared.a */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = archive.ar; path = libPantoShared.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		665508EAF947C1D61C645FEF /* ProStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProStore.swift; sourceTree = "<group>"; };
 		684905FAF45285770224C2A2 /* VPNManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNManager.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				8AADA82C86AC265ECDFB4560 /* AppGroupConstants.swift */,
+				0F6D0E100F3F0FFE2537F993 /* DeepLinkParser.swift */,
 				E92B536B7C8B261730E7FDF5 /* IPCMessage.swift */,
 				41B1FF99E7FB9F93B517155E /* IPCPantoClient.swift */,
 				0D656BE8F1DFB6A6562CC403 /* MockPantoClient.swift */,
@@ -210,6 +215,7 @@
 			children = (
 				1B19A002D2E756F4779F004C /* DashboardView.swift */,
 				F178F14207DB5D28F1272AAF /* GroupsView.swift */,
+				567FBF18BD092C3484739A8E /* ImportConfirmationSheet.swift */,
 				77F6D5DAB232F8C55485332D /* MagicIPConflictSheet.swift */,
 				28CD11E961555AD32F971724 /* MainTabView.swift */,
 				065D3CFF28817751A1509197 /* ProbeView.swift */,
@@ -430,6 +436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				68D32C030F26CA5F601644E4 /* AppGroupConstants.swift in Sources */,
+				A05DA2732D40721EB5F2C56F /* DeepLinkParser.swift in Sources */,
 				74D938AEE5AFE97DC6451BFD /* IPCMessage.swift in Sources */,
 				C23E91DD22F4D8D27E718EF6 /* IPCPantoClient.swift in Sources */,
 				52E62A251CAF03447524EE7A /* MockPantoClient.swift in Sources */,
@@ -455,6 +462,7 @@
 				3C37EFC98ACBFF8C208E62ED /* AppState.swift in Sources */,
 				AE89A526693CEB7B32043807 /* DashboardView.swift in Sources */,
 				743870232E3E7551CF3F93D1 /* GroupsView.swift in Sources */,
+				AC80F299AFBD35D5B88C7EA1 /* ImportConfirmationSheet.swift in Sources */,
 				7DF0B7ED4331BBD8F12680AF /* LanguageManager.swift in Sources */,
 				51039E707C4258248FFB04DA /* LatencyBadge.swift in Sources */,
 				3350AE12DB5CCE1A8C82B2D7 /* MagicIPConflictSheet.swift in Sources */,

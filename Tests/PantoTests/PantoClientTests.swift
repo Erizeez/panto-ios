@@ -149,4 +149,46 @@ final class PantoClientTests: XCTestCase {
         XCTAssertEqual(modeInfo.globalExit, "SG-Node-1")
         XCTAssertEqual(modeInfo.globalTarget, "SG-Node-1")
     }
+
+    func testDeepLinkParser() {
+        // 1. 测试标准 panto://install-config 远程引用导入
+        let pantoURL = URL(string: "panto://install-config?url=http%3A%2F%2F192.168.1.100%3A9090%2Fconfig.yaml&name=SJTU-Campus&token=secret123")!
+        let result = DeepLinkParser.parse(pantoURL)
+        XCTAssertNotNil(result)
+        if case .installConfig(let downloadURL, let name, let token) = result {
+            XCTAssertEqual(downloadURL.absoluteString, "http://192.168.1.100:9090/config.yaml")
+            XCTAssertEqual(name, "SJTU-Campus")
+            XCTAssertEqual(token, "secret123")
+        } else {
+            XCTFail("Expected .installConfig, got \(String(describing: result))")
+        }
+
+        // 2. 测试兼容 clash://install-config 协议
+        let clashURL = URL(string: "clash://install-config?url=https%3A%2F%2Fexample.com%2Fsub.yaml&name=ClashSub")!
+        let clashResult = DeepLinkParser.parse(clashURL)
+        XCTAssertNotNil(clashResult)
+        if case .installConfig(let downloadURL, let name, _) = clashResult {
+            XCTAssertEqual(downloadURL.absoluteString, "https://example.com/sub.yaml")
+            XCTAssertEqual(name, "ClashSub")
+        } else {
+            XCTFail("Expected .installConfig for clash://")
+        }
+
+        // 3. 测试 panto://import?data=... 内联 Base64 数据导入
+        let rawYaml = "version: 1.0\nmixed_port: 7890\n"
+        let base64 = Data(rawYaml.utf8).base64EncodedString()
+        let inlineURL = URL(string: "panto://import?data=\(base64)&name=InlineProfile")!
+        let inlineResult = DeepLinkParser.parse(inlineURL)
+        XCTAssertNotNil(inlineResult)
+        if case .importData(let content, let name) = inlineResult {
+            XCTAssertEqual(content, rawYaml)
+            XCTAssertEqual(name, "InlineProfile")
+        } else {
+            XCTFail("Expected .importData")
+        }
+
+        // 4. 测试非法 URL 或无关 Scheme
+        let invalidURL = URL(string: "https://example.com")!
+        XCTAssertNil(DeepLinkParser.parse(invalidURL))
+    }
 }

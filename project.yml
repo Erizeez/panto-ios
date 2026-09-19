@@ -71,6 +71,11 @@ targets:
         CFBundleVersion: "1"
         UIFileSharingEnabled: true
         LSSupportsOpeningDocumentsInPlace: true
+        CFBundleURLTypes:
+          - CFBundleURLName: org.panto.ios
+            CFBundleURLSchemes:
+              - panto
+              - clash
     entitlements:
       path: PantoApp/PantoApp.entitlements
     settings:
