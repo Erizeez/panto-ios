@@ -12,8 +12,8 @@ public struct GroupsView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    // 顶部并发测速与 K8s 哲学横幅
-                    k8sSchedulerBanner
+                    // 顶部并发测速与自适应调度横幅
+                    schedulerBanner
 
                     // 策略组列表
                     ForEach(appState.groups) { group in
@@ -40,13 +40,13 @@ public struct GroupsView: View {
         }
     }
 
-    private var k8sSchedulerBanner: some View {
+    private var schedulerBanner: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("K8s 纯函数调度管道")
+                Text("自适应调度管道".localized)
                     .font(.headline)
                     .fontWeight(.bold)
-                Text("遵循 Filter (存活过滤) ➔ Score (延时权重打分) ➔ Pick (优选绑定) 哲学")
+                Text("遵循 Filter (存活过滤) ➔ Score (延时权重打分) ➔ Pick (优选绑定) 机制".localized)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

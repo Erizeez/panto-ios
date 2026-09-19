@@ -11,6 +11,7 @@
 		0AAB4BE4B71F56F10FFE005D /* PantoKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 49C0B312BC76EFF590581853 /* PantoKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1BB1557FB5247A36C135F958 /* PantoKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C0B312BC76EFF590581853 /* PantoKit.xcframework */; };
 		2078013B5B300F7E668FA82D /* ProUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD7874A1636379C54F707F1 /* ProUpgradeView.swift */; };
+		258A3BDD37CA0B871209ABA6 /* LivePantoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ACEB72EC165B2E47B2D12B /* LivePantoClient.swift */; };
 		32689C3C4A8F8346165335C2 /* PantoKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C0B312BC76EFF590581853 /* PantoKit.xcframework */; };
 		3350AE12DB5CCE1A8C82B2D7 /* MagicIPConflictSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F6D5DAB232F8C55485332D /* MagicIPConflictSheet.swift */; };
 		3514E3139C7F2B5FBA3F88C1 /* TrafficChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0E268C9C890906900870B9 /* TrafficChartView.swift */; };
@@ -26,6 +27,7 @@
 		743870232E3E7551CF3F93D1 /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F178F14207DB5D28F1272AAF /* GroupsView.swift */; };
 		74D938AEE5AFE97DC6451BFD /* IPCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B536B7C8B261730E7FDF5 /* IPCMessage.swift */; };
 		7DF0B7ED4331BBD8F12680AF /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1259F514217018557297D5 /* LanguageManager.swift */; };
+		834E42045DFEB2E694B33D3B /* ConfigProfileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0E0EAD44DED0E78DA14FF /* ConfigProfileParser.swift */; };
 		872EF778A207DE7959C11F11 /* PantoTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8A914A6B4221613B9AE40AEC /* PantoTunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8B861B040A29874BB4ABF871 /* ProbeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065D3CFF28817751A1509197 /* ProbeView.swift */; };
 		92145B9AC772E0EC98835070 /* libPantoShared.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6A1196B2CC669BEFE912CC /* libPantoShared.a */; };
@@ -118,6 +120,7 @@
 		8A914A6B4221613B9AE40AEC /* PantoTunnel.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PantoTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AADA82C86AC265ECDFB4560 /* AppGroupConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroupConstants.swift; sourceTree = "<group>"; };
 		8C75AEADF5AD65FF206BECD4 /* VirtualInterfacesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualInterfacesSheet.swift; sourceTree = "<group>"; };
+		93ACEB72EC165B2E47B2D12B /* LivePantoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePantoClient.swift; sourceTree = "<group>"; };
 		985DDABEA613B82113C87A4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AE0E268C9C890906900870B9 /* TrafficChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficChartView.swift; sourceTree = "<group>"; };
 		B379B7B5EA061E12F5BE25A2 /* LatencyBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatencyBadge.swift; sourceTree = "<group>"; };
@@ -125,6 +128,7 @@
 		B4994788BEA41EAE19E3F2FC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		BC86C83CA5EE59EA12C38A19 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		BEAF4D412697E521B90A7861 /* TopologyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopologyView.swift; sourceTree = "<group>"; };
+		BFD0E0EAD44DED0E78DA14FF /* ConfigProfileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigProfileParser.swift; sourceTree = "<group>"; };
 		BFD7874A1636379C54F707F1 /* ProUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpgradeView.swift; sourceTree = "<group>"; };
 		C8EA098041F6DE3B0169E763 /* PantoApp.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PantoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD0C02A94E35E3787626FA23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -200,9 +204,11 @@
 			isa = PBXGroup;
 			children = (
 				8AADA82C86AC265ECDFB4560 /* AppGroupConstants.swift */,
+				BFD0E0EAD44DED0E78DA14FF /* ConfigProfileParser.swift */,
 				0F6D0E100F3F0FFE2537F993 /* DeepLinkParser.swift */,
 				E92B536B7C8B261730E7FDF5 /* IPCMessage.swift */,
 				41B1FF99E7FB9F93B517155E /* IPCPantoClient.swift */,
+				93ACEB72EC165B2E47B2D12B /* LivePantoClient.swift */,
 				0D656BE8F1DFB6A6562CC403 /* MockPantoClient.swift */,
 				B4994788BEA41EAE19E3F2FC /* Models.swift */,
 				49A7535CBDC758C95039FB0B /* PantoClientProtocol.swift */,
@@ -436,9 +442,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				68D32C030F26CA5F601644E4 /* AppGroupConstants.swift in Sources */,
+				834E42045DFEB2E694B33D3B /* ConfigProfileParser.swift in Sources */,
 				A05DA2732D40721EB5F2C56F /* DeepLinkParser.swift in Sources */,
 				74D938AEE5AFE97DC6451BFD /* IPCMessage.swift in Sources */,
 				C23E91DD22F4D8D27E718EF6 /* IPCPantoClient.swift in Sources */,
+				258A3BDD37CA0B871209ABA6 /* LivePantoClient.swift in Sources */,
 				52E62A251CAF03447524EE7A /* MockPantoClient.swift in Sources */,
 				4760BA7887F3B7541D048B50 /* Models.swift in Sources */,
 				725EBC67CCAA408D68992672 /* PantoClientProtocol.swift in Sources */,

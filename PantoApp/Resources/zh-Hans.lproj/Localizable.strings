@@ -60,7 +60,7 @@
 
 /* Pro Banner & Upgrade */
 "Panto Pro 终身尊享版" = "Panto Pro 终身尊享版";
-"解锁 Underlay Chain 无限制嵌套与自适应 K8s 调度" = "解锁 Underlay Chain 无限制嵌套与自适应 K8s 调度";
+"解锁 Underlay Chain 无限制嵌套与自适应链路调度" = "解锁 Underlay Chain 无限制嵌套与自适应链路调度";
 "Panto 基础开源版" = "Panto 基础开源版";
 "全功能已解锁 · 无限制 Underlay 嵌套" = "全功能已解锁 · 无限制 Underlay 嵌套";
 "支持买断升级，支持家庭共享" = "支持买断升级，支持家庭共享";
@@ -97,8 +97,8 @@
 /* Groups & Scheduler */
 "策略调度组" = "策略调度组";
 "全部测速" = "全部测速";
-"K8s 纯函数调度管道" = "K8s 纯函数调度管道";
-"遵循 Filter (存活过滤) ➔ Score (延时权重打分) ➔ Pick (优选绑定) 哲学" = "遵循 Filter (存活过滤) ➔ Score (延时权重打分) ➔ Pick (优选绑定) 哲学";
+"自适应调度管道" = "自适应调度管道";
+"遵循 Filter (存活过滤) ➔ Score (延时权重打分) ➔ Pick (优选绑定) 机制" = "遵循 Filter (存活过滤) ➔ Score (延时权重打分) ➔ Pick (优选绑定) 机制";
 "节点延迟" = "节点延迟";
 "未测速" = "未测速";
 

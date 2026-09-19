@@ -404,7 +404,7 @@ public struct DashboardView: View {
                 Text("Panto Pro 终身尊享版".localized)
                     .font(.subheadline)
                     .fontWeight(.bold)
-                Text("解锁 Underlay Chain 无限制嵌套与自适应 K8s 调度".localized)
+                Text("解锁 Underlay Chain 无限制嵌套与自适应链路调度".localized)
                     .font(.caption2)
                     .foregroundColor(.secondary)
             }

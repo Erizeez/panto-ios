@@ -60,7 +60,7 @@
 
 /* Pro Banner & Upgrade */
 "Panto Pro 终身尊享版" = "Panto Pro Lifetime";
-"解锁 Underlay Chain 无限制嵌套与自适应 K8s 调度" = "Unlock unlimited Underlay Chain nesting & adaptive K8s scheduling";
+"解锁 Underlay Chain 无限制嵌套与自适应链路调度" = "Unlock unlimited Underlay Chain nesting & adaptive routing pipeline";
 "Panto 基础开源版" = "Panto Community Edition";
 "全功能已解锁 · 无限制 Underlay 嵌套" = "All features unlocked · Unlimited Underlay nesting";
 "支持买断升级，支持家庭共享" = "One-time purchase · Family Sharing supported";
@@ -97,8 +97,8 @@
 /* Groups & Scheduler */
 "策略调度组" = "Policy Groups";
 "全部测速" = "Speed Test All";
-"K8s 纯函数调度管道" = "K8s Scheduler Pipeline";
-"遵循 Filter (存活过滤) ➔ Score (延时权重打分) ➔ Pick (优选绑定) 哲学" = "Filter (liveness) ➔ Score (latency weighting) ➔ Pick (binding) workflow";
+"自适应调度管道" = "Adaptive Scheduler Pipeline";
+"遵循 Filter (存活过滤) ➔ Score (延时权重打分) ➔ Pick (优选绑定) 机制" = "Filter (liveness) ➔ Score (latency weighting) ➔ Pick (binding) workflow";
 "节点延迟" = "Node Latency";
 "未测速" = "Untested";
 

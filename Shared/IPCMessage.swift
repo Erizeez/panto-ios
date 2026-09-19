@@ -95,6 +95,24 @@ public struct StatusPayload: Codable {
     public let mode: String?
     public let globalTarget: String?
 
+    public init(
+        running: Bool,
+        uptimeSeconds: Int,
+        activeEndpoints: Int = 1,
+        activeGroups: Int = 1,
+        activeRules: Int = 0,
+        mode: String? = "rule",
+        globalTarget: String? = nil
+    ) {
+        self.running = running
+        self.uptimeSeconds = uptimeSeconds
+        self.activeEndpoints = activeEndpoints
+        self.activeGroups = activeGroups
+        self.activeRules = activeRules
+        self.mode = mode
+        self.globalTarget = globalTarget
+    }
+
     enum CodingKeys: String, CodingKey {
         case running
         case uptimeSeconds = "uptime_seconds"
@@ -112,6 +130,13 @@ public struct TrafficPayload: Codable {
     public let downBytes: Int64
     public let upRate: Int64
     public let downRate: Int64
+
+    public init(upBytes: Int64, downBytes: Int64, upRate: Int64, downRate: Int64) {
+        self.upBytes = upBytes
+        self.downBytes = downBytes
+        self.upRate = upRate
+        self.downRate = downRate
+    }
 
     enum CodingKeys: String, CodingKey {
         case upBytes = "up_bytes"

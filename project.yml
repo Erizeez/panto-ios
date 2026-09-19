@@ -49,6 +49,11 @@ targets:
           NSExtensionPrincipalClass: "$(PRODUCT_MODULE_NAME).PacketTunnelProvider"
     entitlements:
       path: PantoTunnel/PantoTunnel.entitlements
+      properties:
+        com.apple.developer.networking.networkextension:
+          - packet-tunnel
+        com.apple.security.application-groups:
+          - group.org.panto.ios
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: org.panto.ios.PantoTunnel
       SKIP_INSTALL: "YES"
@@ -78,5 +83,10 @@ targets:
               - clash
     entitlements:
       path: PantoApp/PantoApp.entitlements
+      properties:
+        com.apple.developer.networking.networkextension:
+          - packet-tunnel
+        com.apple.security.application-groups:
+          - group.org.panto.ios
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: org.panto.ios

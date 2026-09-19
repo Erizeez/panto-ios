@@ -26,7 +26,7 @@ public struct ProUpgradeView: View {
 
                 VStack(alignment: .leading, spacing: 16) {
                     featureBenefit(icon: "square.stack.3d.up.fill", title: "多层 Underlay Chain 嵌套", desc: "任意编排 Tailscale over IKEv2 等复杂多层拓扑")
-                    featureBenefit(icon: "cpu.fill", title: "K8s 纯函数高级调度", desc: "毫秒级自适应 Filter 与 Score 路由优选")
+                    featureBenefit(icon: "cpu.fill", title: "自适应高级调度管道", desc: "毫秒级自适应 Filter 与 Score 路由优选")
                     featureBenefit(icon: "icloud.fill", title: "iCloud 跨设备加密漫游", desc: "配置文件在多台 iOS / Mac 设备间安全漫游")
                 }
                 .padding()

@@ -50,13 +50,20 @@ public struct MainTabView: View {
         .tint(.accentColor)
         .sheet(item: $importPayload) { payload in
             ImportConfirmationSheet(appState: appState, payload: payload) {
-                Task { await appState.refreshAll() }
+                appState.reloadLocalProfile()
             }
         }
         .alert(isPresented: $showingErrorAlert) {
             Alert(
                 title: Text("导入失败".localized),
                 message: Text(errorMessage ?? ""),
+                dismissButton: .default(Text("好的".localized))
+            )
+        }
+        .alert(isPresented: $appState.showingVPNAlert) {
+            Alert(
+                title: Text("VPN 提示".localized),
+                message: Text(appState.vpnAlertMessage ?? ""),
                 dismissButton: .default(Text("好的".localized))
             )
         }

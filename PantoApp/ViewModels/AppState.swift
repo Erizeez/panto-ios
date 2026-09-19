@@ -49,29 +49,31 @@ public final class AppState: ObservableObject {
     @Published public var selectedConflict: MagicIPConflictItem? = nil
     @Published public var showingVirtualInterfacesSheet: Bool = false
 
+    @Published public var vpnAlertMessage: String? = nil
+    @Published public var showingVPNAlert: Bool = false
+
     private var pollTimer: Timer?
+    private lazy var liveClient: LivePantoClient = {
+        LivePantoClient { [weak self] req in
+            guard let self = self else { throw NSError(domain: "panto", code: -1) }
+            return try await self.vpn.sendMessage(req)
+        }
+    }()
     private var mockClient = MockPantoClient()
 
     public init(vpnManager: VPNManager) {
         self.vpn = vpnManager
-        self.client = mockClient
+        self.client = mockClient // 临时赋值，将在 setupClient 中替换
         setupClient()
 
-        // 初始填充平滑起伏的历史流量点 (供点阵频谱图展示冷暖色彩变化)
+        // 初始填充微小底噪平直基线
         let now = Date()
-        for i in (0..<52).reversed() {
-            let t = Double(52 - i)
-            // 叠加正弦波与随机爆发，产生明显的峰谷与冷暖色阶变化
-            let upBurst = sin(t / 4.0) * 800.0 + sin(t / 1.5) * 400.0 + 1200.0
-            let downBurst = sin(t / 3.2) * 8000.0 + sin(t / 1.8) * 4000.0 + 10500.0
-            let upRate = max(5.0, upBurst + Double.random(in: -100...200))
-            let downRate = max(15.0, downBurst + Double.random(in: -800...1200))
-
+        for i in (0..<30).reversed() {
             trafficHistory.append(
                 TrafficPoint(
                     timestamp: now.addingTimeInterval(-Double(i)),
-                    upRate: upRate,
-                    downRate: downRate
+                    upRate: 0.0,
+                    downRate: 0.0
                 )
             )
         }
@@ -82,18 +84,24 @@ public final class AppState: ObservableObject {
         }
     }
 
+    public func reloadLocalProfile() {
+        liveClient.reloadFromLocalConfig()
+        Task { await refreshAll() }
+    }
+
     private func setupClient() {
         if useMockMode {
             self.client = mockClient
         } else {
-            self.client = IPCPantoClient { [weak self] req in
-                guard let self = self else { throw NSError(domain: "panto", code: -1) }
-                return try await self.vpn.sendMessage(req)
-            }
+            self.client = liveClient
         }
     }
 
     public func refreshAll() async {
+        if !useMockMode {
+            liveClient.reloadFromLocalConfig()
+        }
+
         async let statusTask = try? client.getStatus()
         async let modeTask = try? client.getMode()
         async let groupsTask = try? client.getGroups()
@@ -157,10 +165,15 @@ public final class AppState: ObservableObject {
     }
 
     public func toggleTunnel() async {
-        if vpn.status == .connected {
+        if vpn.status == .connected || vpn.status == .connecting {
             vpn.stopTunnel()
         } else {
-            try? await vpn.startTunnel()
+            do {
+                try await vpn.startTunnel()
+            } catch {
+                self.vpnAlertMessage = "启动 VPN 失败: \(error.localizedDescription)"
+                self.showingVPNAlert = true
+            }
         }
         await refreshAll()
     }

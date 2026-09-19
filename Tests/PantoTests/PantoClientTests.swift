@@ -191,4 +191,63 @@ final class PantoClientTests: XCTestCase {
         let invalidURL = URL(string: "https://example.com")!
         XCTAssertNil(DeepLinkParser.parse(invalidURL))
     }
+
+    func testConfigProfileParser() {
+        let sampleYaml = """
+        version: '1'
+        mode: rule
+        mixed_port: 7890
+        endpoints:
+        - id: wan
+          kind: direct
+        - id: sjtu
+          kind: ikev2
+          underlay: wan
+        - id: corp-tailscale
+          kind: tailscale
+          underlay: sjtu
+        - id: hk-01
+          kind: vless
+          underlay: wan
+        groups:
+        - id: Proxy
+          kind: select
+          members:
+          - Auto
+          - sjtu
+          - corp-tailscale
+          - hk-01
+        - id: Auto
+          kind: url-test
+          members:
+          - hk-01
+        rules:
+        - DOMAIN-SUFFIX,ts.net,corp-tailscale
+        - IP-CIDR,10.0.0.0/8,corp-tailscale
+        - MATCH,Proxy
+        """
+
+        let parsed = ConfigProfileParser.parse(yaml: sampleYaml)
+        XCTAssertEqual(parsed.mode, .rule)
+        XCTAssertEqual(parsed.mixedPort, 7890)
+        
+        // 验证端点
+        XCTAssertEqual(parsed.endpoints.count, 4)
+        XCTAssertTrue(parsed.endpoints.contains(where: { $0.id == "sjtu" && $0.kind == "ikev2" }))
+        XCTAssertTrue(parsed.endpoints.contains(where: { $0.id == "corp-tailscale" && $0.underlay == "sjtu" }))
+        XCTAssertTrue(parsed.endpoints.contains(where: { $0.id == "hk-01" }))
+
+        // 验证策略组
+        XCTAssertEqual(parsed.groups.count, 2)
+        let proxyGroup = parsed.groups.first(where: { $0.id == "Proxy" })
+        XCTAssertNotNil(proxyGroup)
+        XCTAssertEqual(proxyGroup?.members.count, 4)
+        XCTAssertEqual(proxyGroup?.current, "Auto")
+
+        // 验证规则
+        XCTAssertEqual(parsed.rules.count, 3)
+        XCTAssertEqual(parsed.rules[0].type, "DOMAIN-SUFFIX")
+        XCTAssertEqual(parsed.rules[0].payload, "ts.net")
+        XCTAssertEqual(parsed.rules[0].target, "corp-tailscale")
+    }
 }
