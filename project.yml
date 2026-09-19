@@ -13,7 +13,8 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    CODE_SIGNING_ALLOWED: "NO"
+    DEVELOPMENT_TEAM: "LMN7J83U7H"
+    CODE_SIGN_STYLE: "Automatic"
     EXCLUDED_ARCHS[sdk=iphonesimulator*]: "x86_64"
     ONLY_ACTIVE_ARCH: "YES"
 
@@ -68,6 +69,8 @@ targets:
       properties:
         CFBundleShortVersionString: "0.1.0-alpha"
         CFBundleVersion: "1"
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
     entitlements:
       path: PantoApp/PantoApp.entitlements
     settings:

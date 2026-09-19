@@ -14,3 +14,13 @@ xcuserdata/
 # PantoKit 预编译二进制框架 (由 build-xcframework.sh 产出)
 Frameworks/
 PantoKit/PantoKit.xcframework
+
+# 敏感用户配置与凭据 (严禁 Git 跟踪)
+*.local.yaml
+*.local.yml
+config.yaml
+config.yml
+panto.yaml
+panto.yml
+*.ovpn
+*.conf

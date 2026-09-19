@@ -46,7 +46,8 @@ public class PacketTunnelProvider: NEPacketTunnelProvider {
 
             self.logger.info("✅ Panto Tunnel 虚拟网卡装载成功，准备启动底层核心...")
             #if canImport(PantoKit)
-            _ = panto_mobile_start("")
+            let configYaml = AppGroupConstants.loadConfig() ?? ""
+            _ = panto_mobile_start(configYaml)
             #endif
 
             self.isRunning = true

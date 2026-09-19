@@ -6,6 +6,11 @@ public struct SettingsView: View {
     @EnvironmentObject private var proStore: ProStore
     @ObservedObject private var languageManager = LanguageManager.shared
     @State private var showingProSheet = false
+    @State private var hasConfig: Bool = AppGroupConstants.hasActiveConfig
+    @State private var configSummary: String? = nil
+    @State private var showingFileImporter: Bool = false
+    @State private var alertMessage: String? = nil
+    @State private var showingAlert: Bool = false
 
     public init(appState: AppState) {
         self.appState = appState
@@ -24,7 +29,48 @@ public struct SettingsView: View {
                     }
                 }
 
-                // 2. Pro 商业版状态
+                // 2. 配置文件与节点规则
+                Section("配置文件与节点规则".localized) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(hasConfig ? "当前配置已就绪".localized : "暂无已导入配置".localized)
+                                .font(.body)
+                                .fontWeight(.semibold)
+                                .foregroundColor(hasConfig ? .primary : .secondary)
+                            if let summary = configSummary {
+                                Text(summary)
+                                    .font(.caption2)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        Spacer()
+                        Circle()
+                            .fill(hasConfig ? Color.green : Color.orange)
+                            .frame(width: 10, height: 10)
+                    }
+
+                    Button {
+                        importFromClipboard()
+                    } label: {
+                        Label("从剪贴板导入 YAML 配置".localized, systemImage: "doc.on.clipboard")
+                    }
+
+                    Button {
+                        showingFileImporter = true
+                    } label: {
+                        Label("从系统文件选取导入".localized, systemImage: "folder")
+                    }
+
+                    if hasConfig {
+                        Button(role: .destructive) {
+                            clearConfig()
+                        } label: {
+                            Label("清空当前配置".localized, systemImage: "trash")
+                        }
+                    }
+                }
+
+                // 3. Pro 商业版状态
                 Section {
                     HStack(spacing: 14) {
                         Image(systemName: "crown.fill")
@@ -91,7 +137,71 @@ public struct SettingsView: View {
                 ProUpgradeView()
                     .environmentObject(proStore)
             }
+            .fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.data, .text, .item]) { result in
+                switch result {
+                case .success(let url):
+                    guard url.startAccessingSecurityScopedResource() else { return }
+                    defer { url.stopAccessingSecurityScopedResource() }
+                    if let content = try? String(contentsOf: url, encoding: .utf8) {
+                        do {
+                            try AppGroupConstants.saveConfig(content)
+                            updateConfigStatus()
+                            showAlert("成功从文件导入配置文件！")
+                            Task { await appState.refreshAll() }
+                        } catch {
+                            showAlert("保存配置失败: \(error.localizedDescription)")
+                        }
+                    }
+                case .failure(let err):
+                    showAlert("选取文件失败: \(err.localizedDescription)")
+                }
+            }
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("配置管理".localized), message: Text(alertMessage ?? ""), dismissButton: .default(Text("好的".localized)))
+            }
+            .onAppear {
+                updateConfigStatus()
+            }
         }
+    }
+
+    private func updateConfigStatus() {
+        hasConfig = AppGroupConstants.hasActiveConfig
+        if let text = AppGroupConstants.loadConfig() {
+            let lineCount = text.split(separator: "\n").count
+            let kb = max(1, text.utf8.count / 1024)
+            configSummary = "大小: \(kb) KB · 行数: \(lineCount) 行"
+        } else {
+            configSummary = nil
+        }
+    }
+
+    private func importFromClipboard() {
+        guard let text = UIPasteboard.general.string, !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            showAlert("剪贴板中未找到文本内容")
+            return
+        }
+        do {
+            try AppGroupConstants.saveConfig(text)
+            updateConfigStatus()
+            showAlert("成功从剪贴板导入配置文件！")
+            Task { await appState.refreshAll() }
+        } catch {
+            showAlert("保存配置失败: \(error.localizedDescription)")
+        }
+    }
+
+    private func clearConfig() {
+        if let url = AppGroupConstants.sharedConfigURL {
+            try? FileManager.default.removeItem(at: url)
+        }
+        updateConfigStatus()
+        showAlert("已清空配置文件")
+    }
+
+    private func showAlert(_ msg: String) {
+        alertMessage = msg
+        showingAlert = true
     }
 
     private func labeledRow(_ title: String, value: String) -> some View {
