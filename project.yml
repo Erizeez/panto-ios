@@ -51,7 +51,7 @@ targets:
       path: PantoTunnel/PantoTunnel.entitlements
       properties:
         com.apple.developer.networking.networkextension:
-          - packet-tunnel
+          - packet-tunnel-provider
         com.apple.security.application-groups:
           - group.org.panto.ios
     settings:
@@ -85,7 +85,7 @@ targets:
       path: PantoApp/PantoApp.entitlements
       properties:
         com.apple.developer.networking.networkextension:
-          - packet-tunnel
+          - packet-tunnel-provider
         com.apple.security.application-groups:
           - group.org.panto.ios
     settings:
