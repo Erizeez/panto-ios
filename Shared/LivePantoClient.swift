@@ -297,20 +297,106 @@ public final class LivePantoClient: PantoClientProtocol, @unchecked Sendable {
     }
 
     public func getProbeSites() async throws -> [ProbeSite] {
-        return [
-            ProbeSite(id: "apple", name: "Apple Services", domain: "captive.apple.com", port: 443, category: "apple", icon: "apple.logo", description: "Apple Captive Portal"),
-            ProbeSite(id: "cloudflare", name: "Cloudflare", domain: "1.1.1.1", port: 443, category: "dns", icon: "bolt.horizontal.fill", description: "Cloudflare Anycast DNS"),
-            ProbeSite(id: "google", name: "Google", domain: "www.google.com", port: 443, category: "search", icon: "magnifyingglass", description: "Google Search Engine")
-        ]
+        return ProbeSiteCatalog.defaultSites
+    }
+
+    private func probeSingleSite(_ site: ProbeSite) async -> ProbeResultItem {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        let urlStr = "https://\(site.domain)"
+        guard let url = URL(string: urlStr) else {
+            return ProbeResultItem(
+                id: site.id,
+                name: site.name,
+                domain: site.domain,
+                category: site.category,
+                ruleTarget: "DIRECT",
+                selectedEndpoint: "DIRECT",
+                chain: ["DIRECT"],
+                latencyMs: -1,
+                status: "URL Error",
+                error: "无效的域名格式"
+            )
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "HEAD"
+        request.timeoutInterval = 3.0
+
+        lock.lock()
+        let activeTarget = globalExit ?? "DIRECT"
+        lock.unlock()
+        let isDirect = site.category.contains("国内") || site.category.contains("校园")
+
+        do {
+            let (_, response) = try await URLSession.shared.data(for: request)
+            let latency = max(1, Int((CFAbsoluteTimeGetCurrent() - startTime) * 1000))
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 200
+            return ProbeResultItem(
+                id: site.id,
+                name: site.name,
+                domain: site.domain,
+                category: site.category,
+                ruleTarget: isDirect ? "DIRECT" : "Proxy",
+                selectedEndpoint: isDirect ? "DIRECT" : activeTarget,
+                chain: isDirect ? ["DIRECT"] : ["DIRECT", activeTarget],
+                latencyMs: latency,
+                status: "\(statusCode) OK",
+                error: nil
+            )
+        } catch {
+            return ProbeResultItem(
+                id: site.id,
+                name: site.name,
+                domain: site.domain,
+                category: site.category,
+                ruleTarget: isDirect ? "DIRECT" : "Proxy",
+                selectedEndpoint: isDirect ? "DIRECT" : activeTarget,
+                chain: isDirect ? ["DIRECT"] : ["DIRECT", activeTarget],
+                latencyMs: -1,
+                status: "Timeout",
+                error: error.localizedDescription
+            )
+        }
     }
 
     public func testProbeSites(siteId: String?) async throws -> [ProbeResultItem] {
-        return []
+        let targets: [ProbeSite]
+        if let siteId = siteId {
+            targets = ProbeSiteCatalog.defaultSites.filter { $0.id == siteId }
+        } else {
+            targets = ProbeSiteCatalog.defaultSites
+        }
+
+        return await withTaskGroup(of: ProbeResultItem.self, returning: [ProbeResultItem].self) { group in
+            for site in targets {
+                group.addTask {
+                    return await self.probeSingleSite(site)
+                }
+            }
+            var list: [ProbeResultItem] = []
+            for await item in group {
+                list.append(item)
+            }
+            return list
+        }
     }
 
     public func streamProbeSites() -> AsyncStream<ProbeResultItem> {
+        let sites = ProbeSiteCatalog.defaultSites
         return AsyncStream { continuation in
-            continuation.finish()
+            Task {
+                await withTaskGroup(of: ProbeResultItem.self) { group in
+                    for site in sites {
+                        group.addTask {
+                            return await self.probeSingleSite(site)
+                        }
+                    }
+                    for await item in group {
+                        continuation.yield(item)
+                    }
+                }
+                continuation.finish()
+            }
         }
     }
 }

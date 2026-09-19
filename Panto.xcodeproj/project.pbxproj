@@ -20,6 +20,7 @@
 		2078013B5B300F7E668FA82D /* ProUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD7874A1636379C54F707F1 /* ProUpgradeView.swift */; };
 		209A89CD8CB0C50494D7209C /* AppIcon-Night40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B3C4DBD11823F5C9548A8B /* AppIcon-Night40x40@3x.png */; };
 		22D8A301F84B229E47F7FCE9 /* AppIcon-Day40x40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ED6A97A04B6414FC3C6B2C0 /* AppIcon-Day40x40@3x.png */; };
+		253A7649E4C5B5257C151EAF /* ProbeSiteCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D7418EA7FA6AA6CB0EA2E /* ProbeSiteCatalog.swift */; };
 		258A3BDD37CA0B871209ABA6 /* LivePantoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ACEB72EC165B2E47B2D12B /* LivePantoClient.swift */; };
 		258B85722EBE762D365A44CD /* AppIcon-Day60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8725332A66CA254665FEFDF /* AppIcon-Day60x60@2x.png */; };
 		2BCE2DCA5A348E27E57CF75C /* AppIcon-Day40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4242462E656794D3C66A8EE4 /* AppIcon-Day40x40@2x.png */; };
@@ -172,6 +173,7 @@
 		4B13739D3A5101A41E3B8202 /* PowerButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerButtonView.swift; sourceTree = "<group>"; };
 		4EC8CB8F0B38FE2AEA8C1C75 /* AppIcon-Twilight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Twilight@3x.png"; sourceTree = "<group>"; };
 		5176794743022D3E31C0459A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		525D7418EA7FA6AA6CB0EA2E /* ProbeSiteCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbeSiteCatalog.swift; sourceTree = "<group>"; };
 		55F0471E6CEE3DBEC7FC0F91 /* AppIcon-Twilight76x76@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Twilight76x76@2x~ipad.png"; sourceTree = "<group>"; };
 		567FBF18BD092C3484739A8E /* ImportConfirmationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportConfirmationSheet.swift; sourceTree = "<group>"; };
 		589964E11EA095838DDA2F61 /* AppIcon-Twilight40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-Twilight40x40@2x.png"; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				0D656BE8F1DFB6A6562CC403 /* MockPantoClient.swift */,
 				B4994788BEA41EAE19E3F2FC /* Models.swift */,
 				49A7535CBDC758C95039FB0B /* PantoClientProtocol.swift */,
+				525D7418EA7FA6AA6CB0EA2E /* ProbeSiteCatalog.swift */,
 				E7108AC3D482F3D09B4D4ED1 /* ProfileManager.swift */,
 			);
 			path = Shared;
@@ -656,6 +659,7 @@
 				52E62A251CAF03447524EE7A /* MockPantoClient.swift in Sources */,
 				4760BA7887F3B7541D048B50 /* Models.swift in Sources */,
 				725EBC67CCAA408D68992672 /* PantoClientProtocol.swift in Sources */,
+				253A7649E4C5B5257C151EAF /* ProbeSiteCatalog.swift in Sources */,
 				9D10E788FDBCE53DCADDCD24 /* ProfileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
